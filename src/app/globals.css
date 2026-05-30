@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F3EFE6;
+  --foreground: #1a1a1a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "SF-Pro-Display", Roboto, sans-serif;
+  --animate-marquee: marquee 25s linear infinite;
+
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+  }
+
+  --color-surface-base: #000000;
+  --color-text-secondary: #ffffff;
+  --color-text-tertiary: #69727d;
+  --color-text-inverse: #171614;
+  --color-surface-raised: #8ce6db;
+  --color-surface-strong: #eef0f2;
+
+  --font-size-xs: 16px;
+  --font-size-sm: 18px;
+  --font-size-md: 19px;
+  --font-size-lg: 21px;
+  --font-size-xl: 22px;
+  --font-size-2xl: 25px;
+  --font-size-3xl: 29px;
+  --font-size-4xl: 33px;
+
+  --spacing-1: 4px;
+  --spacing-2: 5px;
+  --spacing-3: 8px;
+  --spacing-4: 9px;
+  --spacing-5: 10px;
+  --spacing-6: 13px;
+  --spacing-7: 14px;
+  --spacing-8: 15px;
+
+  --radius-xs: 5px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
+  --radius-xl: 50px;
+
+  --shadow-1: rgba(0, 0, 0, 0.024) 0px 2px 1px 0px inset;
+  --shadow-2: rgb(0, 0, 0) 3px 3px 0px 1px;
+  --shadow-3: rgb(0, 0, 0) 7px 5px 0px 1px;
+  --shadow-4: rgb(0, 0, 0) 2.14561px 1.01499px 0px 1px;
+
+  --motion-duration-instant: 200ms;
+  --motion-duration-fast: 300ms;
+  --motion-duration-normal: 400ms;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
