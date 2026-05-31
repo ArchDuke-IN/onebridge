@@ -8,14 +8,25 @@ export function Footer() {
       <div className="max-w-[1600px] mx-auto px-6 md:px-12 py-16 md:py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-6">
-              <svg className="w-8 h-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                <polyline points="21 15 16 10 5 21"></polyline>
-              </svg>
-              <span className="font-bold text-xl text-gray-900">{siteConfig.name}</span>
-            </div>
+          <div className="mb-6">
+            <svg viewBox="0 0 220 72" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-12 w-auto">
+              <path d="M52 34 A 32 32 0 0 1 108 34" stroke="#F97316" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
+              <line x1="80" y1="6" x2="38" y2="42" stroke="#9ca3af" strokeWidth="0.9"/>
+              <line x1="80" y1="12" x2="50" y2="42" stroke="#9ca3af" strokeWidth="0.9"/>
+              <line x1="80" y1="18" x2="62" y2="42" stroke="#9ca3af" strokeWidth="0.9"/>
+              <line x1="80" y1="6" x2="122" y2="42" stroke="#9ca3af" strokeWidth="0.9"/>
+              <line x1="80" y1="12" x2="110" y2="42" stroke="#9ca3af" strokeWidth="0.9"/>
+              <line x1="80" y1="18" x2="98" y2="42" stroke="#9ca3af" strokeWidth="0.9"/>
+              <polygon points="77,4 83,4 86,42 74,42" fill="#F97316"/>
+              <path d="M28 43 Q80 36 132 43" stroke="#1a2744" strokeWidth="3" fill="none" strokeLinecap="round"/>
+              <text x="144" y="26" fontFamily="'Fjalla One', Impact, sans-serif" fontSize="18" fontWeight="700" fill="#1a2744" letterSpacing="0.5">ONE</text>
+              <text x="182" y="26" fontFamily="'Fjalla One', Impact, sans-serif" fontSize="18" fontWeight="700" fill="#F97316" letterSpacing="0.5">BRIDGE</text>
+              <line x1="144" y1="33" x2="154" y2="33" stroke="#F97316" strokeWidth="1.5"/>
+              <line x1="210" y1="33" x2="220" y2="33" stroke="#F97316" strokeWidth="1.5"/>
+              <text x="156" y="40" fontFamily="Arial, sans-serif" fontSize="9" fontWeight="400" fill="#6b7280" letterSpacing="2.5">MARKETING</text>
+            </svg>
+          </div>
+
             <p className="text-gray-600 max-w-md leading-relaxed mb-8">
               {siteConfig.description}
             </p>

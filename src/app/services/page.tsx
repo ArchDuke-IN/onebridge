@@ -29,70 +29,89 @@ export default function ServicesPage() {
                 </p>
             </div>
             <div className="pb-4">
-                <Link href="/contact" className="inline-block bg-blue-600 text-white font-bold py-4 px-10 rounded-full text-lg border-[1.5px] border-gray-900 shadow-[2px_2px_0px_0px_rgba(26,26,26,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
+                <Link href="/contact" className="inline-block bg-blue-600 text-white font-bold py-4 px-10 rounded-full text-lg border-[1.5px] border-gray-900 shadow-[4px_4px_0px_0px_rgba(26,26,26,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(26,26,26,1)] transition-all">
                     Start a Project
                 </Link>
             </div>
         </div>
       </section>
 
-      {/* SERVICES BENTO EXPLORER */}
-      <section className="bg-[#F3EFE6] py-24 px-6 md:px-12 max-w-[1600px] mx-auto w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      {/* SERVICES CAROUSEL */}
+      <section className="bg-[#F3EFE6] w-full border-t-[1.5px] border-gray-900 overflow-hidden py-24">
+        <div className="px-6 md:px-12 max-w-[1600px] mx-auto w-full mb-12 flex justify-between items-end">
+            <h2 className="font-fjalla text-4xl md:text-6xl text-gray-900 uppercase">Core Capabilities</h2>
+            <div className="hidden md:flex gap-4">
+                {/* Visual indicator arrows for the horizontal scroll */}
+                <div className="w-12 h-12 rounded-full border-[2px] border-gray-900 flex items-center justify-center hover:bg-white cursor-pointer shadow-[3px_3px_0px_0px_rgba(26,26,26,1)] transition-colors">
+                    <span className="font-bold text-xl select-none" aria-hidden="true">&larr;</span>
+                </div>
+                <div className="w-12 h-12 rounded-full border-[2px] border-gray-900 flex items-center justify-center hover:bg-white cursor-pointer shadow-[3px_3px_0px_0px_rgba(26,26,26,1)] transition-colors">
+                    <span className="font-bold text-xl select-none" aria-hidden="true">&rarr;</span>
+                </div>
+            </div>
+        </div>
+
+        {/* Horizontal Scroll Container */}
+        <div className="flex overflow-x-auto gap-8 px-6 md:px-12 pb-12 w-full snap-x snap-mandatory scroll-smooth hide-scrollbar" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
             {[
-                { 
+                {
                     id: "01",
-                    title: "Social Media Management", 
-                    desc: "Strategy, content, posting & engagement across all platforms.",
-                    span: "lg:col-span-2 lg:row-span-2",
-                    bg: "bg-blue-50"
-                },
-                { 
-                    id: "02",
-                    title: "Content Creation", 
-                    desc: "Reels, videos, carousels, graphics & branded posts that stop the scroll.",
-                    span: "lg:col-span-1 lg:row-span-1",
-                    bg: "bg-white"
-                },
-                { 
-                    id: "03",
-                    title: "Branding & Identity", 
-                    desc: "Logos, visual identity, profile optimisation & brand positioning.",
-                    span: "lg:col-span-1 lg:row-span-1",
-                    bg: "bg-orange-50"
-                },
-                { 
-                    id: "04",
-                    title: "Website Development", 
-                    desc: "Fast, clean, conversion-focused websites working 24/7 for you.",
-                    span: "lg:col-span-1 lg:row-span-1",
-                    bg: "bg-white"
-                },
-                { 
-                    id: "05",
-                    title: "Digital Marketing", 
-                    desc: "Paid Ads (Meta, Google), SEO, Email Marketing & automation setups.",
-                    span: "lg:col-span-1 lg:row-span-1",
-                    bg: "bg-white"
-                },
-                { 
-                    id: "06",
-                    title: "Influencer Marketing", 
-                    desc: "Identifying, outreach, and managing campaigns with local creators.",
-                    span: "lg:col-span-1 lg:row-span-1",
-                    bg: "bg-blue-50"
-                }
-            ].map((s, i) => (
-                <div key={i} className={`group p-10 md:p-12 rounded-3xl border-[1.5px] border-gray-900 shadow-[6px_6px_0px_0px_rgba(26,26,26,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(26,26,26,1)] transition-all flex flex-col justify-between ${s.span} ${s.bg}`}>
-                    <div className="flex justify-between items-start mb-16">
-                        <span className="font-fjalla text-3xl text-gray-400">{s.id}</span>
-                        <div className="w-12 h-12 rounded-full border-[1.5px] border-gray-900 flex items-center justify-center -rotate-45 group-hover:rotate-0 transition-transform">
+                    title: "Social Media Management",
+                desc: "Strategy, content, posting & engagement across all platforms.",
+                bg: "bg-[#08D9D6]" // Cyan from contacts page
+            },
+            {
+                id: "02",
+                title: "Content Creation",
+                desc: "Reels, videos, carousels, graphics & branded posts that stop the scroll.",
+                bg: "bg-[#FF66C4]" // Magenta
+            },
+            {
+                id: "03",
+                title: "Branding & Identity",
+                desc: "Logos, visual identity, profile optimisation & brand positioning.",
+                bg: "bg-[#FFE135]" // Yellow
+            },
+            {
+                id: "04",
+                title: "Website Development",
+                desc: "Fast, clean, conversion-focused websites working 24/7 for you.",
+                bg: "bg-white"
+            },
+            {
+                id: "05",
+                title: "Digital Marketing",
+                desc: "Paid Ads (Meta, Google), SEO, Email Marketing & automation setups.",
+                bg: "bg-[#A05CFF]" // Purple
+            },
+            {
+                id: "06",
+                title: "Influencer Marketing",
+                desc: "Identifying, outreach, and managing campaigns with local creators.",
+                bg: "bg-[#52FFC2]" // Lime
+            }].map((s, i) => (
+                <div key={i} className={`group min-w-[85vw] sm:min-w-[400px] h-[500px] p-8 md:p-10 rounded-[2rem] border-[3px] border-gray-900 shadow-[8px_8px_0px_0px_rgba(26,26,26,1)] hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_rgba(26,26,26,1)] transition-all flex flex-col justify-between snap-center shrink-0 ${s.bg} relative overflow-hidden`} style={{
+                    backgroundImage: i % 2 !== 0 ? "linear-gradient(rgba(26, 26, 26, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(26, 26, 26, 0.1) 1px, transparent 1px)" : "none",
+                    backgroundSize: "20px 20px"
+                }}>
+                    
+                    {/* Decorative Background Shape */}
+                    {(i % 2 === 0) && (
+                        <svg className="absolute -top-10 -right-10 w-48 h-48 opacity-20 text-gray-900 rotate-12" viewBox="0 0 100 100" fill="currentColor">
+                           <polygon points="50,0 100,25 100,75 50,100 0,75 0,25"/>
+                        </svg>
+                    )}
+                    
+                    <div className="flex justify-between items-start mb-16 relative z-10 w-full">
+                        <span className="font-fjalla text-5xl text-gray-900 drop-shadow-[2px_2px_0px_rgba(255,255,255,1)]" style={{ WebkitTextStroke: "1px #1a1a1a" }}>{s.id}</span>
+                        <div className="w-14 h-14 bg-white rounded-full border-[2px] border-gray-900 flex items-center justify-center -rotate-45 group-hover:rotate-0 transition-transform shadow-[4px_4px_0px_0px_rgba(26,26,26,1)] text-xl font-bold shrink-0">
                             &rarr;
                         </div>
                     </div>
-                    <div>
-                        <h3 className="font-fjalla text-4xl mb-4 text-gray-900 uppercase leading-[0.9]">{s.title}</h3>
-                        <p className="text-lg font-medium leading-relaxed text-gray-600">
+                    
+                    <div className="relative z-10 bg-white/95 p-6 rounded-2xl border-[2px] border-gray-900 shadow-[4px_4px_0px_0px_rgba(26,26,26,1)] group-hover:-translate-y-1 transition-transform">
+                        <h3 className="font-fjalla text-4xl mb-3 text-gray-900 uppercase leading-[0.95] drop-shadow-sm">{s.title}</h3>
+                        <p className="text-lg font-bold leading-relaxed text-gray-800">
                             {s.desc}
                         </p>
                     </div>

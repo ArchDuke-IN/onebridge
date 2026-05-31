@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import Link from "next/link";
 import * as motion from "framer-motion/client";
 import { AnimatedArrow } from "@/components/layout/animated-arrow";
@@ -19,6 +19,65 @@ export default function Home() {
             <h1 className="font-fjalla text-[clamp(4rem,12vw,10rem)] leading-[0.8] tracking-tight text-orange-500">BRIDGE</h1>
         </div>
 
+        {/* Playful Neo-brutalist Floating Accents & Creative Elements */}
+        <motion.div 
+          animate={{ y: [0, -10, 0] }}
+          transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+          className="hidden lg:grid grid-cols-3 grid-rows-3 gap-2 absolute top-24 right-48 z-0 opacity-80"
+          aria-hidden="true"
+        >
+            {[...Array(9)].map((_, i) => (
+                <div key={i} className="w-4 h-4 bg-orange-200 rounded-full border-[1.5px] border-gray-900 shadow-[2px_2px_0px_0px_rgba(26,26,26,1)]"></div>
+            ))}
+        </motion.div>
+
+        {/* Wireframe Grid */}
+        <div className="absolute top-12 left-1/3 w-40 h-40 border-[1px] border-blue-500/10 grid grid-cols-4 grid-rows-4 pointer-events-none z-0" aria-hidden="true">
+            {[...Array(16)].map((_, i) => (
+              <div key={i} className="border-[0.5px] border-blue-500/5"></div>
+            ))}
+        </div>
+
+        {/* Large Arc */}
+        <svg className="absolute right-12 top-1/3 w-64 h-64 text-orange-500/10 pointer-events-none z-0" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.5" aria-hidden="true">
+            <circle cx="100" cy="0" r="80" />
+        </svg>
+
+        {/* Star Sparkles */}
+        <motion.svg 
+          animate={{ y: [0, -8, 0], rotate: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+          className="absolute top-32 left-1/4 w-8 h-8 text-blue-600/30 pointer-events-none z-0" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          strokeWidth="1"
+          aria-hidden="true"
+        >
+            <path d="M12 2 L13.5 10.5 L22 12 L13.5 13.5 L12 22 L10.5 13.5 L2 12 L10.5 10.5 Z" />
+        </motion.svg>
+
+        <motion.svg 
+          animate={{ y: [0, 8, 0], rotate: [0, -10, 0] }}
+          transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+          className="absolute bottom-32 right-1/4 w-10 h-10 text-orange-500/30 pointer-events-none z-0" 
+          viewBox="0 0 24 24" 
+          fill="currentColor"
+          aria-hidden="true"
+        >
+            <path d="M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z" />
+        </motion.svg>
+
+        <motion.div 
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+          className="absolute bottom-24 left-1/4 z-0 hidden lg:flex items-end gap-2 rotate-[-5deg]"
+        >
+            <div className="w-8 h-16 bg-orange-500 border-[1.5px] border-gray-900"></div>
+            <div className="w-8 h-24 bg-blue-500 border-[1.5px] border-gray-900"></div>
+            <div className="w-16 h-16 bg-[#FFE1A8] rounded-full border-[1.5px] border-gray-900"></div>
+        </motion.div>
+
         <div className="relative z-10 w-full grid grid-cols-1 lg:grid-cols-3 gap-12 items-center mt-20 lg:mt-32">
             
             {/* Left Column */}
@@ -31,7 +90,7 @@ export default function Home() {
                 <p className="text-sm md:text-base text-gray-800 leading-relaxed font-medium">
                   We are your complete digital growth partner that handles everything online so you can focus on running your business.
                 </p>
-                <Link href="/contact" className="bg-orange-500 text-center text-white font-bold py-3 px-8 rounded-full w-max border-[1.5px] border-gray-900 shadow-[2px_2px_0px_0px_rgba(26,26,26,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
+                <Link href="/contact" className="bg-orange-500 text-center text-white font-bold py-4 px-10 rounded-full w-max border-[1.5px] border-gray-900 shadow-[4px_4px_0px_0px_rgba(26,26,26,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(26,26,26,1)] transition-all">
                   Start Your Growth
                 </Link>
                 <div className="pt-8 flex space-x-12">
@@ -143,7 +202,7 @@ export default function Home() {
               Why Most Small Businesses Struggle Online
             </h2>
             <p className="mt-6 text-lg text-gray-600 font-medium">
-              It's not that small businesses don't care about their online presence. They are simply too busy running their business to do it right.
+              It&apos;s not that small businesses don&apos;t care about their online presence. They are simply too busy running their business to do it right.
             </p>
           </motion.div>
 
@@ -179,7 +238,7 @@ export default function Home() {
              className="mt-16 bg-blue-600 text-white p-8 md:p-12 rounded-3xl border-[1.5px] border-gray-900 flex flex-col md:flex-row items-center justify-between shadow-[8px_8px_0px_0px_rgba(26,26,26,1)] hover:shadow-[12px_12px_0px_0px_rgba(26,26,26,1)] transition-shadow duration-300"
           >
             <h3 className="font-fjalla text-2xl md:text-3xl uppercase tracking-wide max-w-xl mb-6 md:mb-0">
-              OneBridge solves every single one of these. That's what we were built for.
+              OneBridge solves every single one of these. That&apos;s what we were built for.
             </h3>
             <Link href="/about" className="bg-white text-gray-900 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition-colors whitespace-nowrap border-[1.5px] border-gray-900">
               Learn How We Do It
@@ -261,7 +320,7 @@ export default function Home() {
                        <li className="flex items-start gap-3"><span className="text-blue-500">✓</span> Automated Email Sequences replacing manual outreach.</li>
                    </ul>
                 </div>
-                <Link href="/case-studies/gridmaster" className="mt-4 font-bold bg-orange-500 text-white px-8 py-3 rounded-full w-max border-[1.5px] border-gray-900 shadow-[2px_2px_0px_0px_rgba(26,26,26,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all hover:shadow-none text-lg flex items-center space-x-2">
+                <Link href="/case-studies/gridmaster" className="mt-4 font-bold bg-orange-500 text-white px-10 py-4 rounded-full w-max border-[1.5px] border-gray-900 shadow-[4px_4px_0px_0px_rgba(26,26,26,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(26,26,26,1)] transition-all text-lg flex items-center space-x-2">
                    <span>Read Full Case Study</span>
                    <span>&rarr;</span>
                 </Link>
@@ -322,7 +381,7 @@ export default function Home() {
                     What Growth <span className="text-blue-500">Looks Like.</span>
                 </h2>
                 <p className="text-gray-600 text-lg max-w-lg">
-                    Real metrics that show how our 'Done-For-You' digital strategy translates into tangible business results.
+                    Real metrics that show how our &apos;Done-For-You&apos; digital strategy translates into tangible business results.
                 </p>
             </div>
             

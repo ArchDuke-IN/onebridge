@@ -10,7 +10,7 @@ export const siteConfig = {
   },
   location: "India",
   contact: {
-    email: "hello@onebridgemarketing.in",
+    email: "contact@onebridgemarketing.com",
     phone: "+91 98765 43210"
   }
 }
