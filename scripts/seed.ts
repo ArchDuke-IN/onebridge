@@ -1,7 +1,7 @@
 import { hash } from 'bcryptjs';
 import { neon } from '@neondatabase/serverless';
 
-const databaseUrl = process.env.POSTGRES_URL || process.env.DATABASE_URL;
+const databaseUrl = process.env.NEON_DB_URL || process.env.POSTGRES_URL || process.env.DATABASE_URL;
 if (!databaseUrl) { console.error('Missing POSTGRES_URL or DATABASE_URL'); process.exit(1); }
 const sql = neon(databaseUrl);
 

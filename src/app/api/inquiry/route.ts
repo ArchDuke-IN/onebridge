@@ -10,7 +10,7 @@ export async function POST(req: Request) {
   }
 
   try {
-    const databaseUrl = process.env.POSTGRES_URL || process.env.DATABASE_URL;
+    const databaseUrl = process.env.NEON_DB_URL || process.env.POSTGRES_URL || process.env.DATABASE_URL;
     if (!databaseUrl) return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
     const sql = neon(databaseUrl);
     const now = new Date().toISOString();

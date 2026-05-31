@@ -2,7 +2,7 @@ import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
 import * as schema from './schema';
 
-const url = process.env.POSTGRES_URL || process.env.DATABASE_URL;
+const url = process.env.NEON_DB_URL || process.env.POSTGRES_URL || process.env.DATABASE_URL;
 
 if (!url) {
   throw new Error('POSTGRES_URL or DATABASE_URL environment variable is required');
