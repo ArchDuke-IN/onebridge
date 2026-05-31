@@ -1,7 +1,9 @@
 import { hash } from 'bcryptjs';
 import { neon } from '@neondatabase/serverless';
 
-const sql = neon(process.env.POSTGRES_URL!);
+const databaseUrl = process.env.POSTGRES_URL || process.env.DATABASE_URL;
+if (!databaseUrl) { console.error('Missing POSTGRES_URL or DATABASE_URL'); process.exit(1); }
+const sql = neon(databaseUrl);
 
 async function seed() {
   await sql`CREATE TABLE IF NOT EXISTS users (
