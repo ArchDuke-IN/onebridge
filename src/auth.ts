@@ -14,13 +14,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        console.log('[auth] authorize called');
         if (!credentials?.email || !credentials?.password) return null;
 
-        console.log('[auth] db:', !!db);
         try {
           const rows = await db.select().from(users).where(eq(users.email, credentials.email as string));
-          console.log('[auth] rows:', rows?.length);
           const user = rows?.[0];
           if (!user) return null;
 
@@ -28,8 +25,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           if (!valid) return null;
 
           return { id: String(user.id), name: user.name, email: user.email };
-        } catch (err) {
-          console.error('[auth] error:', err);
+        } catch {
           return null;
         }
       },

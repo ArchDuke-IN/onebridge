@@ -67,7 +67,7 @@ export function Footer() {
               <Link href="/" className="text-gray-600 hover:text-blue-600 transition-colors motion-duration-fast text-sm">Home</Link>
               <Link href="/about" className="text-gray-600 hover:text-blue-600 transition-colors motion-duration-fast text-sm">About</Link>
               <Link href="/services" className="text-gray-600 hover:text-blue-600 transition-colors motion-duration-fast text-sm">Services</Link>
-              <Link href="/projects" className="text-gray-600 hover:text-blue-600 transition-colors motion-duration-fast text-sm">Pricing</Link>
+              <Link href="/projects" className="text-gray-600 hover:text-blue-600 transition-colors motion-duration-fast text-sm">Projects</Link>
               <Link href="/contact" className="text-gray-600 hover:text-blue-600 transition-colors motion-duration-fast text-sm">Contact</Link>
             </nav>
           </div>

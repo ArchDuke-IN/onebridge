@@ -7,10 +7,27 @@ import { Icons } from '@/components/icons';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSending(true);
+    const form = new FormData(e.currentTarget);
+    try {
+      await fetch('/api/inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.get('name'),
+          company: form.get('company'),
+          email: form.get('email'),
+          phone: form.get('number'),
+          message: form.get('message'),
+        }),
+      });
+    } catch {}
     setSubmitted(true);
+    setSending(false);
   };
 
   return (
