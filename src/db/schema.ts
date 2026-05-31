@@ -37,3 +37,11 @@ export const pageViews = pgTable('page_views', {
   date: text('date').notNull(),
   count: integer('count').notNull().default(1),
 });
+
+export const siteImages = pgTable('site_images', {
+  id: serial('id').primaryKey(),
+  key: text('key').notNull().unique(),
+  url: text('url').notNull().default(''),
+  alt: text('alt').notNull().default(''),
+  updatedAt: text('updated_at').notNull().default('2025-01-01T00:00:00.000Z'),
+});

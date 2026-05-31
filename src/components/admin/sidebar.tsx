@@ -3,12 +3,13 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
-import { LayoutDashboard, FileText, PenLine, BarChart3, LogOut } from 'lucide-react';
+import { LayoutDashboard, FileText, PenLine, BarChart3, ImageIcon, LogOut } from 'lucide-react';
 
 const links = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/posts', label: 'Blog Posts', icon: FileText },
   { href: '/admin/content', label: 'Site Content', icon: PenLine },
+  { href: '/admin/content/images', label: 'Images', icon: ImageIcon },
   { href: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
 ];
 

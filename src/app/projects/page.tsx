@@ -3,6 +3,11 @@ import { siteConfig } from '@/config/site';
 import Link from 'next/link';
 import * as motion from 'framer-motion/client';
 import { Icons } from '@/components/icons';
+import { db } from '@/db';
+import { siteImages } from '@/db/schema';
+import { asc } from 'drizzle-orm';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Our Work & Results | One Bridge Marketing',
@@ -52,16 +57,19 @@ const testimonials = [
   { quote: 'Finally, an agency that doesn\'t just promise the world and disappear. We\'ve scaled our ad spend with total confidence.', name: 'Elena R.', role: 'Marketing Director, RetailHQ', accent: 'border-blue-500 shadow-[6px_6px_0px_0px_rgba(59,130,246,1)]' },
 ];
 
-const services = [
-  { name: 'Social Media Management', icon: <Icons.Phone className="w-6 h-6" />, color: 'bg-blue-600 text-white', img: 'https://picsum.photos/seed/social-media-phone/600/400' },
-  { name: 'Content Creation', icon: <Icons.Video className="w-6 h-6" />, color: 'bg-orange-500 text-white', img: 'https://picsum.photos/seed/video-content-studio/600/400' },
-  { name: 'Branding & Identity', icon: <Icons.Palette className="w-6 h-6" />, color: 'bg-[#1a2744] text-white', img: 'https://picsum.photos/seed/brand-design-agency/600/400' },
-  { name: 'Website Development', icon: <Icons.Laptop className="w-6 h-6" />, color: 'bg-[#F3EFE6] text-gray-900', img: 'https://picsum.photos/seed/web-development-laptop/600/400' },
-  { name: 'Digital Marketing', icon: <Icons.BarChart className="w-6 h-6" />, color: 'bg-orange-500 text-white', img: 'https://picsum.photos/seed/digital-marketing-data/600/400' },
-  { name: 'Influencer Marketing', icon: <Icons.Handshake className="w-6 h-6" />, color: 'bg-blue-600 text-white', img: 'https://picsum.photos/seed/influencer-collab/600/400' },
+const serviceDefaults = [
+  { key: 'project_social_media', name: 'Social Media Management', icon: <Icons.Phone className="w-6 h-6" />, color: 'bg-blue-600 text-white' },
+  { key: 'project_content_creation', name: 'Content Creation', icon: <Icons.Video className="w-6 h-6" />, color: 'bg-orange-500 text-white' },
+  { key: 'project_branding', name: 'Branding & Identity', icon: <Icons.Palette className="w-6 h-6" />, color: 'bg-[#1a2744] text-white' },
+  { key: 'project_web_dev', name: 'Website Development', icon: <Icons.Laptop className="w-6 h-6" />, color: 'bg-[#F3EFE6] text-gray-900' },
+  { key: 'project_digital_marketing', name: 'Digital Marketing', icon: <Icons.BarChart className="w-6 h-6" />, color: 'bg-orange-500 text-white' },
+  { key: 'project_influencer', name: 'Influencer Marketing', icon: <Icons.Handshake className="w-6 h-6" />, color: 'bg-blue-600 text-white' },
 ];
 
-export default function WorkPage() {
+export default async function WorkPage() {
+  const imageRows = await db.select().from(siteImages).orderBy(asc(siteImages.key));
+  const imgMap = new Map(imageRows.map(r => [r.key, r.url]));
+  const services = serviceDefaults.map(s => ({ ...s, img: imgMap.get(s.key) || '' }));
   return (
     <div className="flex flex-col w-full">
 

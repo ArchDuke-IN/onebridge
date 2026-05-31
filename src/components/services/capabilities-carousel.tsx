@@ -3,16 +3,21 @@
 import { useRef } from 'react';
 import Image from 'next/image';
 
-const services = [
-  { id: "01", title: "Social Media Management", desc: "Strategy, content, posting & engagement across all platforms.", bg: "bg-[#08D9D6]", img: "https://picsum.photos/seed/social-media-mgmt/800/1000" },
-  { id: "02", title: "Content Creation", desc: "Reels, videos, carousels, graphics & branded posts that stop the scroll.", bg: "bg-[#FF66C4]", img: "https://picsum.photos/seed/content-creation/800/1000" },
-  { id: "03", title: "Branding & Identity", desc: "Logos, visual identity, profile optimisation & brand positioning.", bg: "bg-[#FFE135]", img: "https://picsum.photos/seed/brand-identity/800/1000" },
-  { id: "04", title: "Website Development", desc: "Fast, clean, conversion-focused websites working 24/7 for you.", bg: "bg-white", img: "https://picsum.photos/seed/web-dev/800/1000" },
-  { id: "05", title: "Digital Marketing", desc: "Paid Ads (Meta, Google), SEO, Email Marketing & automation setups.", bg: "bg-[#A05CFF]", img: "https://picsum.photos/seed/digital-marketing/800/1000" },
-  { id: "06", title: "Influencer Marketing", desc: "Identifying, outreach, and managing campaigns with local creators.", bg: "bg-[#52FFC2]", img: "https://picsum.photos/seed/influencer-mktg/800/1000" },
+const defaultServices = [
+  { id: "01", key: 'service_social_media', title: "Social Media Management", desc: "Strategy, content, posting & engagement across all platforms.", bg: "bg-[#08D9D6]" },
+  { id: "02", key: 'service_content_creation', title: "Content Creation", desc: "Reels, videos, carousels, graphics & branded posts that stop the scroll.", bg: "bg-[#FF66C4]" },
+  { id: "03", key: 'service_branding', title: "Branding & Identity", desc: "Logos, visual identity, profile optimisation & brand positioning.", bg: "bg-[#FFE135]" },
+  { id: "04", key: 'service_web_dev', title: "Website Development", desc: "Fast, clean, conversion-focused websites working 24/7 for you.", bg: "bg-white" },
+  { id: "05", key: 'service_digital_marketing', title: "Digital Marketing", desc: "Paid Ads (Meta, Google), SEO, Email Marketing & automation setups.", bg: "bg-[#A05CFF]" },
+  { id: "06", key: 'service_influencer', title: "Influencer Marketing", desc: "Identifying, outreach, and managing campaigns with local creators.", bg: "bg-[#52FFC2]" },
 ];
 
-export function CapabilitiesCarousel() {
+interface Props {
+  images?: Record<string, string>;
+}
+
+export function CapabilitiesCarousel({ images = {} }: Props) {
+  const services = defaultServices.map(s => ({ ...s, img: images[s.key] }));
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {

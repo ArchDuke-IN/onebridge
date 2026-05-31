@@ -42,6 +42,14 @@ async function seed() {
     count INTEGER NOT NULL DEFAULT 1
   )`;
 
+  await sql`CREATE TABLE IF NOT EXISTS site_images (
+    id SERIAL PRIMARY KEY,
+    key TEXT NOT NULL UNIQUE,
+    url TEXT NOT NULL DEFAULT '',
+    alt TEXT NOT NULL DEFAULT '',
+    updated_at TEXT NOT NULL DEFAULT '2025-01-01T00:00:00.000Z'
+  )`;
+
   const existing = await sql`SELECT id FROM users WHERE email = ${'admin@onebridge.com'}`;
   if (existing.length === 0) {
     const password = await hash('admin123', 10);
@@ -64,6 +72,30 @@ async function seed() {
       await sql`INSERT INTO page_content (page, section, key, value) VALUES (${d.page}, ${d.section}, ${d.key}, ${d.value})`;
     }
     console.log(`Seeded ${defaults.length} content blocks.`);
+  }
+
+  const imgCount = await sql`SELECT COUNT(*) as c FROM site_images`;
+  const imgCountVal = Number(imgCount[0]?.c);
+  if (imgCountVal === 0) {
+    const defaultImages = [
+      { key: 'logo', url: '/logo.jpeg', alt: 'One Bridge Marketing' },
+      { key: 'service_social_media', url: 'https://picsum.photos/seed/social-media-mgmt/800/1000', alt: 'Social media management' },
+      { key: 'service_content_creation', url: 'https://picsum.photos/seed/content-creation/800/1000', alt: 'Content creation' },
+      { key: 'service_branding', url: 'https://picsum.photos/seed/brand-identity/800/1000', alt: 'Branding and identity' },
+      { key: 'service_web_dev', url: 'https://picsum.photos/seed/web-dev/800/1000', alt: 'Website development' },
+      { key: 'service_digital_marketing', url: 'https://picsum.photos/seed/digital-marketing/800/1000', alt: 'Digital marketing' },
+      { key: 'service_influencer', url: 'https://picsum.photos/seed/influencer-mktg/800/1000', alt: 'Influencer marketing' },
+      { key: 'project_social_media', url: 'https://picsum.photos/seed/social-media-phone/600/400', alt: 'Social media on phone' },
+      { key: 'project_content_creation', url: 'https://picsum.photos/seed/video-content-studio/600/400', alt: 'Video content studio' },
+      { key: 'project_branding', url: 'https://picsum.photos/seed/brand-design-agency/600/400', alt: 'Brand design agency' },
+      { key: 'project_web_dev', url: 'https://picsum.photos/seed/web-development-laptop/600/400', alt: 'Web development laptop' },
+      { key: 'project_digital_marketing', url: 'https://picsum.photos/seed/digital-marketing-data/600/400', alt: 'Digital marketing data' },
+      { key: 'project_influencer', url: 'https://picsum.photos/seed/influencer-collab/600/400', alt: 'Influencer collaboration' },
+    ];
+    for (const img of defaultImages) {
+      await sql`INSERT INTO site_images (key, url, alt) VALUES (${img.key}, ${img.url}, ${img.alt})`;
+    }
+    console.log(`Seeded ${defaultImages.length} site images.`);
   }
 
   console.log('Database seeded successfully.');
