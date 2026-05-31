@@ -3,6 +3,7 @@
 import { siteConfig } from '@/config/site';
 import { FormEvent, useState } from 'react';
 import * as motion from 'framer-motion/client';
+import { Icons } from '@/components/icons';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -19,10 +20,10 @@ export default function ContactPage() {
   <svg className="absolute top-0 left-0 w-48 h-48 text-blue-600 animate-spin-slow opacity-30" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">
     <path d="M0,50 Q50,0 100,50" />
   </svg>
-  <div className="absolute bottom-10 right-10 flex space-x-2">
-    <span className="text-2xl text-blue-600 animate-float opacity-70">★</span>
-    <span className="text-2xl text-orange-500 animate-float opacity-70" style={{ animationDelay: "0.3s" }}>✶</span>
-    <span className="text-2xl text-gray-900 animate-float opacity-70" style={{ animationDelay: "0.6s" }}>✦</span>
+  <div className="absolute bottom-10 right-10 flex space-x-3">
+    <Icons.Star4 className="w-5 h-5 text-blue-600 animate-float opacity-70" />
+    <Icons.Star6 className="w-5 h-5 text-orange-500 animate-float opacity-70" style={{ animationDelay: "0.3s" }} />
+    <Icons.Star8 className="w-5 h-5 text-gray-900 animate-float opacity-70" style={{ animationDelay: "0.6s" }} />
   </div>
   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none opacity-10 mix-blend-overlay">
     <span className="font-fjalla text-[20vw] leading-none block whitespace-nowrap">LET&apos;S GROW</span>
@@ -41,7 +42,7 @@ export default function ContactPage() {
       </section>
 
       <section className="w-full border-t-[1.5px] border-gray-900">
-        <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-2 min-h-screen lg:min-h-[700px]">
+        <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-2 min-h-[100dvh] lg:min-h-[700px]">
           <div className="p-8 md:p-16 lg:p-24 bg-[#F3EFE6] border-b-[1.5px] lg:border-b-0 lg:border-r-[1.5px] border-gray-900 flex flex-col justify-center w-full">
             <div className="bg-white p-10 rounded-3xl border-[1.5px] border-gray-900 shadow-[8px_8px_0px_0px_rgba(26,26,26,1)] mb-12 relative overflow-hidden group">
               <div className="absolute -right-8 -top-8 w-32 h-32 bg-blue-100 rounded-full group-hover:scale-150 transition-transform motion-duration-normal"></div>

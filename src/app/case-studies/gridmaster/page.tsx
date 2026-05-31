@@ -28,7 +28,7 @@ export default function GridmasterCaseStudy() {
       {/* HERO */}
       <section className="bg-[#1a2744] relative overflow-hidden border-b-[1.5px] border-gray-900">
         <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '50px 50px' }} />
-        <svg className="absolute top-12 right-12 w-32 h-32 text-orange-500/20 animate-spin-slow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.5"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /></svg>
+        <svg className="hidden md:block absolute top-12 right-12 w-32 h-32 text-orange-500/20 animate-spin-slow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.5"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /></svg>
 
         <div className="max-w-[1200px] mx-auto px-6 md:px-12 py-28 md:py-36 relative z-10">
           <Link href="/projects" className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors text-sm font-medium mb-10 group">
@@ -68,7 +68,7 @@ export default function GridmasterCaseStudy() {
 
           {/* Sidebar */}
           <aside className="lg:col-span-3">
-            <div className="sticky top-24 space-y-8">
+            <div className="lg:sticky top-24 space-y-8">
               <div className="bg-[#F3EFE6] p-6 rounded-2xl border-[1.5px] border-gray-900 shadow-[4px_4px_0px_0px_rgba(26,26,26,1)]">
                 <div className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4">Client</div>
                 <div className="font-fjalla text-2xl text-gray-900 uppercase">GridMaster</div>

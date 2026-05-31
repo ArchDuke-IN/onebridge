@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { siteConfig } from '@/config/site';
 import Link from 'next/link';
 import * as motion from 'framer-motion/client';
+import { Icons } from '@/components/icons';
 
 export const metadata: Metadata = {
   title: 'Our Work & Results | One Bridge Marketing',
@@ -52,12 +53,12 @@ const testimonials = [
 ];
 
 const services = [
-  { name: 'Social Media Management', icon: '📱', color: 'bg-blue-600 text-white', img: 'https://picsum.photos/seed/social-media-phone/600/400' },
-  { name: 'Content Creation', icon: '🎬', color: 'bg-orange-500 text-white', img: 'https://picsum.photos/seed/video-content-studio/600/400' },
-  { name: 'Branding & Identity', icon: '🎨', color: 'bg-[#1a2744] text-white', img: 'https://picsum.photos/seed/brand-design-agency/600/400' },
-  { name: 'Website Development', icon: '💻', color: 'bg-[#F3EFE6] text-gray-900', img: 'https://picsum.photos/seed/web-development-laptop/600/400' },
-  { name: 'Digital Marketing', icon: '📊', color: 'bg-orange-500 text-white', img: 'https://picsum.photos/seed/digital-marketing-data/600/400' },
-  { name: 'Influencer Marketing', icon: '🤝', color: 'bg-blue-600 text-white', img: 'https://picsum.photos/seed/influencer-collab/600/400' },
+  { name: 'Social Media Management', icon: <Icons.Phone className="w-6 h-6" />, color: 'bg-blue-600 text-white', img: 'https://picsum.photos/seed/social-media-phone/600/400' },
+  { name: 'Content Creation', icon: <Icons.Video className="w-6 h-6" />, color: 'bg-orange-500 text-white', img: 'https://picsum.photos/seed/video-content-studio/600/400' },
+  { name: 'Branding & Identity', icon: <Icons.Palette className="w-6 h-6" />, color: 'bg-[#1a2744] text-white', img: 'https://picsum.photos/seed/brand-design-agency/600/400' },
+  { name: 'Website Development', icon: <Icons.Laptop className="w-6 h-6" />, color: 'bg-[#F3EFE6] text-gray-900', img: 'https://picsum.photos/seed/web-development-laptop/600/400' },
+  { name: 'Digital Marketing', icon: <Icons.BarChart className="w-6 h-6" />, color: 'bg-orange-500 text-white', img: 'https://picsum.photos/seed/digital-marketing-data/600/400' },
+  { name: 'Influencer Marketing', icon: <Icons.Handshake className="w-6 h-6" />, color: 'bg-blue-600 text-white', img: 'https://picsum.photos/seed/influencer-collab/600/400' },
 ];
 
 export default function WorkPage() {
@@ -67,8 +68,8 @@ export default function WorkPage() {
       {/* HEADER */}
       <section className="bg-[#1a2744] py-28 px-6 md:px-12 border-b-[1.5px] border-gray-900 overflow-hidden relative">
         <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '50px 50px' }} />
-        <svg className="absolute top-12 right-24 w-12 h-12 text-orange-500/60 animate-spin-slow" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2.5 8.5L23 11l-8.5 2.5L12 22l-2.5-8.5L1 11l8.5-2.5z" /></svg>
-        <svg className="absolute bottom-16 left-16 w-16 h-16 text-white/10 animate-float" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.5"><circle cx="50" cy="50" r="45" /><circle cx="50" cy="50" r="30" /></svg>
+        <svg className="hidden md:block absolute top-12 right-24 w-12 h-12 text-orange-500/60 animate-spin-slow" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2.5 8.5L23 11l-8.5 2.5L12 22l-2.5-8.5L1 11l8.5-2.5z" /></svg>
+        <svg className="hidden md:block absolute bottom-16 left-16 w-16 h-16 text-white/10 animate-float" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.5"><circle cx="50" cy="50" r="45" /><circle cx="50" cy="50" r="30" /></svg>
 
         <div className="max-w-[1200px] mx-auto relative z-10 text-center w-full">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
@@ -188,7 +189,7 @@ export default function WorkPage() {
                 {/* Label bar */}
                 <div className={`${svc.color} p-5 flex items-center justify-between`}>
                   <h4 className="font-fjalla text-xl uppercase">{svc.name}</h4>
-                  <span className="text-2xl">{svc.icon}</span>
+                  <span className="[&svg]:w-6 [&svg]:h-6">{svc.icon}</span>
                 </div>
               </motion.div>
             ))}

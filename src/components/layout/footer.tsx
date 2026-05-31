@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { siteConfig } from '@/config/site';
 import { AnimatedArrow } from './animated-arrow';
 
@@ -9,22 +10,15 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="lg:col-span-2">
           <div className="mb-6">
-            <svg viewBox="0 0 220 72" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-12 w-auto">
-              <path d="M52 34 A 32 32 0 0 1 108 34" stroke="#F97316" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
-              <line x1="80" y1="6" x2="38" y2="42" stroke="#9ca3af" strokeWidth="0.9"/>
-              <line x1="80" y1="12" x2="50" y2="42" stroke="#9ca3af" strokeWidth="0.9"/>
-              <line x1="80" y1="18" x2="62" y2="42" stroke="#9ca3af" strokeWidth="0.9"/>
-              <line x1="80" y1="6" x2="122" y2="42" stroke="#9ca3af" strokeWidth="0.9"/>
-              <line x1="80" y1="12" x2="110" y2="42" stroke="#9ca3af" strokeWidth="0.9"/>
-              <line x1="80" y1="18" x2="98" y2="42" stroke="#9ca3af" strokeWidth="0.9"/>
-              <polygon points="77,4 83,4 86,42 74,42" fill="#F97316"/>
-              <path d="M28 43 Q80 36 132 43" stroke="#1a2744" strokeWidth="3" fill="none" strokeLinecap="round"/>
-              <text x="144" y="26" fontFamily="'Fjalla One', Impact, sans-serif" fontSize="18" fontWeight="700" fill="#1a2744" letterSpacing="0.5">ONE</text>
-              <text x="182" y="26" fontFamily="'Fjalla One', Impact, sans-serif" fontSize="18" fontWeight="700" fill="#F97316" letterSpacing="0.5">BRIDGE</text>
-              <line x1="144" y1="33" x2="154" y2="33" stroke="#F97316" strokeWidth="1.5"/>
-              <line x1="210" y1="33" x2="220" y2="33" stroke="#F97316" strokeWidth="1.5"/>
-              <text x="156" y="40" fontFamily="Arial, sans-serif" fontSize="9" fontWeight="400" fill="#6b7280" letterSpacing="2.5">MARKETING</text>
-            </svg>
+            <div className="bg-white w-[72px] h-[72px] rounded-xl border-[2px] border-gray-900 shadow-[3px_3px_0px_0px_rgba(26,26,26,1)] overflow-hidden">
+              <Image
+                src="/logo.jpeg"
+                alt="One Bridge Marketing"
+                width={72}
+                height={72}
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
 
             <p className="text-gray-600 max-w-md leading-relaxed mb-8">

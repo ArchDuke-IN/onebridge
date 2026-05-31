@@ -5,8 +5,8 @@ export const siteConfig = {
   ogImage: "https://onebridgemarketing.in/og.jpg",
   links: {
     twitter: "https://twitter.com/onebridgemktg",
-    linkedin: "https://linkedin.com/company/onebridgemarketing",
-    instagram: "https://instagram.com/onebridgemarketing"
+    linkedin: "https://www.linkedin.com/company/onebridge-marketing/",
+    instagram: "https://www.instagram.com/onebridgemarketing/"
   },
   location: "India",
   contact: {

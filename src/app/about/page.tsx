@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { siteConfig } from '@/config/site';
 import Link from "next/link";
 import * as motion from 'framer-motion/client';
+import { Icons } from '@/components/icons';
 
 export const metadata: Metadata = {
   title: 'About Us | One Bridge Marketing',
@@ -25,19 +26,19 @@ export default function AboutPage() {
       {/* HEADER — Full-bleed with wireframe grid + arc + stars */}
       <section className="bg-[#1a2744] border-b-[1.5px] border-gray-900 overflow-hidden relative min-h-[520px] flex items-center">
         {/* Wireframe Grid */}
-        <div className="absolute top-8 left-12 w-56 h-56 border-[1px] border-white/10 grid grid-cols-5 grid-rows-5 pointer-events-none z-0" aria-hidden="true">
+        <div className="hidden md:block absolute top-8 left-12 w-56 h-56 border-[1px] border-white/10 grid grid-cols-5 grid-rows-5 pointer-events-none z-0" aria-hidden="true">
           {[...Array(25)].map((_, i) => <div key={i} className="border-[0.5px] border-white/5" />)}
         </div>
         {/* Arc */}
-        <svg className="absolute -right-20 bottom-0 w-80 h-80 text-orange-500/20 pointer-events-none z-0" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.5" aria-hidden="true">
+        <svg className="hidden md:block absolute -right-20 bottom-0 w-80 h-80 text-orange-500/20 pointer-events-none z-0" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.5" aria-hidden="true">
           <circle cx="100" cy="100" r="80" />
           <circle cx="100" cy="100" r="55" />
         </svg>
         {/* Stars */}
-        <svg className="absolute top-20 right-1/4 w-8 h-8 text-orange-400/50 pointer-events-none z-0 animate-spin-slow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" aria-hidden="true">
+        <svg className="hidden md:block absolute top-20 right-1/4 w-8 h-8 text-orange-400/50 pointer-events-none z-0 animate-spin-slow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" aria-hidden="true">
           <path d="M12 2 L13.5 10.5 L22 12 L13.5 13.5 L12 22 L10.5 13.5 L2 12 L10.5 10.5 Z" />
         </svg>
-        <svg className="absolute bottom-16 left-1/3 w-10 h-10 text-white/20 pointer-events-none z-0 animate-float" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <svg className="hidden md:block absolute bottom-16 left-1/3 w-10 h-10 text-white/20 pointer-events-none z-0 animate-float" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z" />
         </svg>
         {/* Dot grid */}
@@ -63,7 +64,7 @@ export default function AboutPage() {
 
           {/* Left: big pulled quote */}
           <div className="lg:col-span-2">
-            <div className="sticky top-24">
+            <div className="lg:sticky top-24">
               <div className="font-fjalla text-[6rem] leading-none text-orange-500/20 mb-0 select-none">&ldquo;</div>
               <h2 className="font-fjalla text-3xl md:text-4xl text-gray-900 uppercase leading-tight -mt-8">
                 The <span className="text-orange-500">Method.</span>
@@ -80,10 +81,10 @@ export default function AboutPage() {
           {/* Right: creative value tiles instead of generic cards */}
           <div className="lg:col-span-3 grid grid-cols-1 gap-0 border-[1.5px] border-gray-900 rounded-3xl overflow-hidden shadow-[8px_8px_0px_0px_rgba(26,26,26,1)]">
             {[
-              { icon: '⚡', label: 'Direct Alignment', body: 'If you don\'t make money, we lose a client. The incentives are aligned.', accent: 'bg-orange-500', textAccent: 'text-white' },
-              { icon: '🚀', label: 'Action Bias', body: 'Less meetings, more shipping. We get campaigns into the market fast.', accent: 'bg-blue-600', textAccent: 'text-white' },
-              { icon: '🎯', label: 'Single Hub', body: 'No more juggling five freelancers. We manage the entire pipeline.', accent: 'bg-[#F3EFE6]', textAccent: 'text-gray-900' },
-              { icon: '📈', label: 'Measured Growth', body: 'Every dollar spent is tracked, measured, and reported plainly.', accent: 'bg-gray-900', textAccent: 'text-white' },
+              { icon: <Icons.Lightning className="w-7 h-7" />, label: 'Direct Alignment', body: 'If you don\'t make money, we lose a client. The incentives are aligned.', accent: 'bg-orange-500', textAccent: 'text-white' },
+              { icon: <Icons.Rocket className="w-7 h-7" />, label: 'Action Bias', body: 'Less meetings, more shipping. We get campaigns into the market fast.', accent: 'bg-blue-600', textAccent: 'text-white' },
+              { icon: <Icons.Target className="w-7 h-7" />, label: 'Single Hub', body: 'No more juggling five freelancers. We manage the entire pipeline.', accent: 'bg-[#F3EFE6]', textAccent: 'text-gray-900' },
+              { icon: <Icons.ChartUp className="w-7 h-7" />, label: 'Measured Growth', body: 'Every dollar spent is tracked, measured, and reported plainly.', accent: 'bg-gray-900', textAccent: 'text-white' },
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -93,7 +94,7 @@ export default function AboutPage() {
                 transition={{ delay: i * 0.1 }}
                 className={`flex items-center gap-6 p-8 border-b-[1.5px] border-gray-900 last:border-b-0 ${item.accent} group hover:scale-[1.01] transition-transform`}
               >
-                <div className={`w-14 h-14 rounded-2xl border-[1.5px] border-gray-900 flex items-center justify-center text-2xl shrink-0 bg-white shadow-[3px_3px_0px_0px_rgba(26,26,26,1)]`}>
+                <div className={`w-14 h-14 rounded-2xl border-[1.5px] border-gray-900 flex items-center justify-center shrink-0 bg-white shadow-[3px_3px_0px_0px_rgba(26,26,26,1)]`}>
                   {item.icon}
                 </div>
                 <div>
