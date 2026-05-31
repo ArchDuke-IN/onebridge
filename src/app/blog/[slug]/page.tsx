@@ -5,16 +5,20 @@ import { posts } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { Metadata } from 'next';
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const post = db.select().from(posts).where(eq(posts.slug, slug)).get();
+  const rows = await db.select().from(posts).where(eq(posts.slug, slug));
+  const post = rows[0];
   if (!post) return { title: 'Not Found' };
   return { title: `${post.title} | One Bridge Marketing` };
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = db.select().from(posts).where(eq(posts.slug, slug)).get();
+  const rows = await db.select().from(posts).where(eq(posts.slug, slug));
+  const post = rows[0];
   if (!post || !post.published) notFound();
 
   return (

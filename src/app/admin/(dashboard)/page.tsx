@@ -4,13 +4,19 @@ import { count, eq, sql } from 'drizzle-orm';
 import { FileText, Eye, Layout, BarChart3 } from 'lucide-react';
 
 export default async function AdminDashboard() {
-  const postCount = db.select({ value: count() }).from(posts).get()?.value ?? 0;
-  const publishedCount = db.select({ value: count() }).from(posts).where(eq(posts.published, true)).get()?.value ?? 0;
-  const contentCount = db.select({ value: count() }).from(pageContent).get()?.value ?? 0;
-  const totalViews = db.select({ value: sql<number>`SUM(${pageViews.count})` }).from(pageViews).get()?.value ?? 0;
+  const [postCountRow, pubCountRow, contentCountRow, viewsRow] = await Promise.all([
+    db.select({ value: count() }).from(posts),
+    db.select({ value: count() }).from(posts).where(eq(posts.published, true)),
+    db.select({ value: count() }).from(pageContent),
+    db.select({ value: sql<number>`SUM(${pageViews.count})` }).from(pageViews),
+  ]);
+  const postCount = postCountRow[0]?.value ?? 0;
+  const publishedCount = pubCountRow[0]?.value ?? 0;
+  const contentCount = contentCountRow[0]?.value ?? 0;
+  const totalViews = viewsRow[0]?.value ?? 0;
 
-  const recentPosts = db.select({ title: posts.title, createdAt: posts.createdAt, published: posts.published })
-    .from(posts).orderBy(sql`${posts.createdAt} DESC`).limit(5).all();
+  const recentPosts = await db.select({ title: posts.title, createdAt: posts.createdAt, published: posts.published })
+    .from(posts).orderBy(sql`${posts.createdAt} DESC`).limit(5);
 
   return (
     <div>

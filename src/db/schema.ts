@@ -1,7 +1,7 @@
-import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
+import { pgTable, serial, text, integer, boolean } from 'drizzle-orm/pg-core';
 
-export const users = sqliteTable('users', {
-  id: integer('id').primaryKey({ autoIncrement: true }),
+export const users = pgTable('users', {
+  id: serial('id').primaryKey(),
   name: text('name').notNull(),
   email: text('email').notNull().unique(),
   password: text('password').notNull(),
@@ -9,21 +9,21 @@ export const users = sqliteTable('users', {
   createdAt: text('created_at').notNull().default('2025-01-01T00:00:00.000Z'),
 });
 
-export const posts = sqliteTable('posts', {
-  id: integer('id').primaryKey({ autoIncrement: true }),
+export const posts = pgTable('posts', {
+  id: serial('id').primaryKey(),
   title: text('title').notNull(),
   slug: text('slug').notNull().unique(),
   content: text('content').notNull().default(''),
   excerpt: text('excerpt').notNull().default(''),
-  published: integer('published', { mode: 'boolean' }).notNull().default(false),
+  published: boolean('published').notNull().default(false),
   image: text('image'),
   authorId: integer('author_id').references(() => users.id),
   createdAt: text('created_at').notNull().default('2025-01-01T00:00:00.000Z'),
   updatedAt: text('updated_at').notNull().default('2025-01-01T00:00:00.000Z'),
 });
 
-export const pageContent = sqliteTable('page_content', {
-  id: integer('id').primaryKey({ autoIncrement: true }),
+export const pageContent = pgTable('page_content', {
+  id: serial('id').primaryKey(),
   page: text('page').notNull(),
   section: text('section').notNull(),
   key: text('key').notNull(),
@@ -31,8 +31,8 @@ export const pageContent = sqliteTable('page_content', {
   updatedAt: text('updated_at').notNull().default('2025-01-01T00:00:00.000Z'),
 });
 
-export const pageViews = sqliteTable('page_views', {
-  id: integer('id').primaryKey({ autoIncrement: true }),
+export const pageViews = pgTable('page_views', {
+  id: serial('id').primaryKey(),
   path: text('path').notNull(),
   date: text('date').notNull(),
   count: integer('count').notNull().default(1),

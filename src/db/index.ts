@@ -1,15 +1,10 @@
-import Database from 'better-sqlite3';
-import { drizzle } from 'drizzle-orm/better-sqlite3';
+import { neon } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-http';
 import * as schema from './schema';
-import { existsSync, mkdirSync } from 'fs';
-import { join } from 'path';
 
-const dataDir = join(process.cwd(), 'data');
-if (!existsSync(dataDir)) {
-  mkdirSync(dataDir, { recursive: true });
-}
+const url = process.env.POSTGRES_URL;
+const sql = url ? neon(url) : null;
 
-const sqlite = new Database(join(dataDir, 'sqlite.db'));
-sqlite.pragma('journal_mode = WAL');
-
-export const db = drizzle(sqlite, { schema });
+export const db = sql
+  ? drizzle(sql, { schema })
+  : (null as unknown as ReturnType<typeof drizzle<typeof schema>>);

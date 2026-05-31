@@ -2,26 +2,30 @@ import { auth } from '@/auth';
 import { db } from '@/db';
 import { pageViews } from '@/db/schema';
 import { redirect } from 'next/navigation';
-import { sql, desc } from 'drizzle-orm';
+import { sql } from 'drizzle-orm';
 import { BarChart3, TrendingUp, Calendar } from 'lucide-react';
 
 export default async function AdminAnalyticsPage() {
   const session = await auth();
   if (!session?.user) redirect('/admin/login');
 
-  const totalViews = db.select({ value: sql<number>`COALESCE(SUM(${pageViews.count}), 0)` }).from(pageViews).get()?.value ?? 0;
-  const uniquePages = db.select({ value: sql<number>`COUNT(DISTINCT ${pageViews.path})` }).from(pageViews).get()?.value ?? 0;
-  const todayViews = db.select({ value: sql<number>`COALESCE(SUM(${pageViews.count}), 0)` }).from(pageViews).where(sql`date = ${new Date().toISOString().slice(0, 10)}`).get()?.value ?? 0;
-
-  const topPages = db.select({
-    path: pageViews.path,
-    total: sql<number>`SUM(${pageViews.count})`,
-  }).from(pageViews).groupBy(pageViews.path).orderBy(sql`SUM(${pageViews.count}) DESC`).limit(10).all();
-
-  const last14Days = db.select({
-    date: pageViews.date,
-    total: sql<number>`SUM(${pageViews.count})`,
-  }).from(pageViews).groupBy(pageViews.date).orderBy(desc(pageViews.date)).limit(14).all().reverse();
+  const [viewsRow, pagesRow, todayRow, topPages, last14Days] = await Promise.all([
+    db.select({ value: sql<number>`COALESCE(SUM(${pageViews.count}), 0)` }).from(pageViews),
+    db.select({ value: sql<number>`COUNT(DISTINCT ${pageViews.path})` }).from(pageViews),
+    db.select({ value: sql<number>`COALESCE(SUM(${pageViews.count}), 0)` }).from(pageViews).where(sql`date = ${new Date().toISOString().slice(0, 10)}`),
+    db.select({
+      path: pageViews.path,
+      total: sql<number>`SUM(${pageViews.count})`,
+    }).from(pageViews).groupBy(pageViews.path).orderBy(sql`SUM(${pageViews.count}) DESC`).limit(10),
+    db.select({
+      date: pageViews.date,
+      total: sql<number>`SUM(${pageViews.count})`,
+    }).from(pageViews).groupBy(pageViews.date).orderBy(sql`${pageViews.date} DESC`).limit(14),
+  ]);
+  const totalViews = viewsRow[0]?.value ?? 0;
+  const uniquePages = pagesRow[0]?.value ?? 0;
+  const todayViews = todayRow[0]?.value ?? 0;
+  const chartData = last14Days.reverse();
 
   return (
     <div>
@@ -56,15 +60,15 @@ export default async function AdminAnalyticsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="bg-white rounded-xl border border-gray-200 p-6">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Last 14 Days</h2>
-          {last14Days.length === 0 ? (
+          {chartData.length === 0 ? (
             <p className="text-gray-500 text-sm">No data yet.</p>
           ) : (
             <div className="space-y-2">
-              {last14Days.map((d) => (
+              {chartData.map((d) => (
                 <div key={d.date} className="flex items-center gap-4">
                   <span className="text-xs text-gray-500 w-24 shrink-0">{d.date}</span>
                   <div className="flex-1 h-5 bg-gray-100 rounded-full overflow-hidden">
-                    <div className="h-full bg-blue-500 rounded-full transition-all" style={{ width: `${Math.min(100, (d.total / Math.max(...last14Days.map(x => x.total))) * 100)}%` }} />
+                    <div className="h-full bg-blue-500 rounded-full transition-all" style={{ width: `${Math.min(100, (d.total / Math.max(...chartData.map(x => x.total))) * 100)}%` }} />
                   </div>
                   <span className="text-xs font-medium text-gray-600 w-10 text-right">{d.total}</span>
                 </div>

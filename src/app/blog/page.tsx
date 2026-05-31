@@ -2,8 +2,9 @@ import Link from 'next/link';
 import { db } from '@/db';
 import { posts } from '@/db/schema';
 import { desc, eq } from 'drizzle-orm';
-import { siteConfig } from '@/config/site';
 import { Metadata } from 'next';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Blog | One Bridge Marketing',
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogPage() {
-  const allPosts = db.select().from(posts).where(eq(posts.published, true)).orderBy(desc(posts.createdAt)).all();
+  const allPosts = await db.select().from(posts).where(eq(posts.published, true)).orderBy(desc(posts.createdAt));
 
   return (
     <div className="flex flex-col w-full">

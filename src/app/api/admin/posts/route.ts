@@ -13,10 +13,10 @@ export async function POST(req: Request) {
 
   if (!title || !slug) return NextResponse.json({ error: 'Title and slug required' }, { status: 400 });
 
-  const existing = db.select().from(posts).where(eq(posts.slug, slug)).get();
-  if (existing) return NextResponse.json({ error: 'Slug already exists' }, { status: 409 });
+  const existingRows = await db.select().from(posts).where(eq(posts.slug, slug));
+  if (existingRows[0]) return NextResponse.json({ error: 'Slug already exists' }, { status: 409 });
 
-  const id = db.insert(posts).values({
+  const rows = await db.insert(posts).values({
     title,
     slug,
     content: content || '',
@@ -24,9 +24,9 @@ export async function POST(req: Request) {
     published: published || false,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-  }).returning({ id: posts.id }).get();
+  }).returning({ id: posts.id });
 
-  return NextResponse.json({ id });
+  return NextResponse.json({ id: rows[0]?.id });
 }
 
 export async function PUT(req: Request) {
@@ -38,14 +38,14 @@ export async function PUT(req: Request) {
 
   if (!id) return NextResponse.json({ error: 'ID required' }, { status: 400 });
 
-  db.update(posts).set({
+  await db.update(posts).set({
     title,
     slug,
     content: content || '',
     excerpt: excerpt || '',
     published: published || false,
     updatedAt: new Date().toISOString(),
-  }).where(eq(posts.id, id)).run();
+  }).where(eq(posts.id, id));
 
   return NextResponse.json({ ok: true });
 }
@@ -55,7 +55,7 @@ export async function DELETE(req: Request) {
   if (!session?.user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const body = await req.json();
-  db.delete(posts).where(eq(posts.id, body.id)).run();
+  await db.delete(posts).where(eq(posts.id, body.id));
 
   return NextResponse.json({ ok: true });
 }

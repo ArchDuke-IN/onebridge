@@ -6,7 +6,8 @@ import { EditPostForm } from './form';
 
 export default async function EditPostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const post = db.select().from(posts).where(eq(posts.id, Number(id))).get();
+  const rows = await db.select().from(posts).where(eq(posts.id, Number(id)));
+  const post = rows[0];
   if (!post) notFound();
 
   return (

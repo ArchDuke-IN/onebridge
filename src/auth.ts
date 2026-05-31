@@ -17,7 +17,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const { users } = await import('@/db/schema');
         const { eq } = await import('drizzle-orm');
 
-        const user = db.select().from(users).where(eq(users.email, credentials.email as string)).get();
+        const rows = await db.select().from(users).where(eq(users.email, credentials.email as string));
+        const user = rows[0];
         if (!user) return null;
 
         const valid = await compare(credentials.password as string, user.password);

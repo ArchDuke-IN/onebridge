@@ -1,16 +1,14 @@
 import { auth } from '@/auth';
 import { db } from '@/db';
 import { pageContent } from '@/db/schema';
-import { eq } from 'drizzle-orm';
 import { redirect } from 'next/navigation';
-import { Save } from 'lucide-react';
 import { ContentEditor } from './editor';
 
 export default async function AdminContentPage() {
   const session = await auth();
   if (!session?.user) redirect('/admin/login');
 
-  const content = db.select().from(pageContent).orderBy(pageContent.page, pageContent.section).all();
+  const content = await db.select().from(pageContent).orderBy(pageContent.page, pageContent.section);
 
   return (
     <div>

@@ -23,6 +23,10 @@
 # misc
 .DS_Store
 *.pem
+/data/
+
+# stray
+/logo.jpeg.jpeg
 
 # debug
 npm-debug.log*

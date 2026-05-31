@@ -5,7 +5,7 @@ import { eq } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const all = db.select().from(pageContent).all();
+  const all = await db.select().from(pageContent);
   return NextResponse.json(all);
 }
 
@@ -18,6 +18,6 @@ export async function PUT(req: Request) {
 
   if (!id) return NextResponse.json({ error: 'ID required' }, { status: 400 });
 
-  db.update(pageContent).set({ value, updatedAt: new Date().toISOString() }).where(eq(pageContent.id, id)).run();
+  await db.update(pageContent).set({ value, updatedAt: new Date().toISOString() }).where(eq(pageContent.id, id));
   return NextResponse.json({ ok: true });
 }

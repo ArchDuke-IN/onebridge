@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { db } from '@/db';
 import { posts } from '@/db/schema';
-import { desc, eq } from 'drizzle-orm';
+import { desc } from 'drizzle-orm';
 import { Plus, Edit } from 'lucide-react';
 
 export default async function AdminPostsPage() {
-  const allPosts = db.select().from(posts).orderBy(desc(posts.createdAt)).all();
+  const allPosts = await db.select().from(posts).orderBy(desc(posts.createdAt));
 
   return (
     <div>
