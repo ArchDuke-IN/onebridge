@@ -2,16 +2,15 @@
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import Image from "next/image";
-import { Menu, X, ChevronDown, LayoutGrid, MessageSquare, BookOpen } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import * as motion from "framer-motion/client";
 import { usePathname } from "next/navigation";
 
 const workLinks = [
-  { href: '/projects', label: 'Portfolio', icon: LayoutGrid, desc: 'See our client results & case studies' },
-  { href: '/projects#testimonials', label: 'Testimonials', icon: MessageSquare, desc: 'What our clients say about us' },
-  { href: '/case-studies/gridmaster', label: 'Case Studies', icon: BookOpen, desc: 'Deep-dive into our work' },
+  { href: '/projects', label: 'Portfolio', desc: 'See our client results' },
+  { href: '/projects#testimonials', label: 'Testimonials', desc: 'What clients say' },
+  { href: '/case-studies/gridmaster', label: 'Case Studies', desc: 'Deep-dive into our work' },
 ];
 
 export function Navbar() {
@@ -61,125 +60,93 @@ export function Navbar() {
 
   return (
     <nav className={cn(
-      "sticky top-0 z-50 w-full transition-all duration-300",
-      scrolled
-        ? "bg-blue-600 shadow-[0_4px_24px_rgba(0,0,0,0.18)]"
-        : "bg-blue-600/95 backdrop-blur-sm"
+      "sticky top-0 z-50 w-full transition-all duration-300 bg-white border-b border-[var(--border)]",
+      scrolled && "shadow-sm"
     )}>
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 flex items-center justify-between h-16 md:h-[72px]">
+      <div className="max-w-[1200px] mx-auto px-6 flex items-center justify-between h-14 md:h-16">
 
-        {/* Logo */}
-        <Link href="/" className="flex items-center shrink-0" aria-label="One Bridge Marketing">
-          <div className="bg-white w-[64px] h-[64px] rounded-xl border-[2px] border-gray-900 shadow-[3px_3px_0px_0px_rgba(26,26,26,1)] overflow-hidden">
-            <Image
-              src="/logo.jpeg"
-              alt="One Bridge Marketing"
-              width={64}
-              height={64}
-              className="w-full h-full object-cover"
-              priority
-            />
-          </div>
+        <Link href="/" className="flex items-center gap-2 shrink-0" aria-label="One Bridge Marketing">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 20 L16 8 L28 20" stroke="#1a2744" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M8 24 L16 14 L24 24" stroke="#F97316" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+            <circle cx="16" cy="8" r="2" fill="#1a2744"/>
+          </svg>
+          <span className="font-[var(--font-playfair)] text-lg text-[var(--navy)] font-bold tracking-tight">One Bridge</span>
         </Link>
 
-        {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-1">
           {mainLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className={cn(
-                "px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150",
-                isActive(link.href)
-                  ? "text-orange-400 bg-orange-500/10"
-                  : "text-white/80 hover:text-orange-400 hover:bg-white/5"
+                "px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150 text-[var(--text)] hover:text-[var(--navy)]",
+                isActive(link.href) && "text-[var(--navy)] font-semibold"
               )}
             >
               {link.label}
             </Link>
           ))}
 
-          {/* Our Work Dropdown */}
           <div ref={dropdownRef} className="relative">
             <button
               onClick={() => setWorkOpen(!workOpen)}
               className={cn(
-                "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150",
-                workOpen ? "text-orange-400 bg-orange-500/10" : "text-white/80 hover:text-orange-400 hover:bg-white/5"
+                "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150 text-[var(--text)] hover:text-[var(--navy)]",
+                workOpen && "text-[var(--navy)]"
               )}
               aria-expanded={workOpen}
             >
-              Our Work
-              <ChevronDown className={cn("w-4 h-4 transition-transform duration-200", workOpen && "rotate-180")} />
+              Work
+              <ChevronDown className={cn("w-3.5 h-3.5 transition-transform duration-200", workOpen && "rotate-180")} />
             </button>
 
             {workOpen && (
               <motion.div
-                initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                initial={{ opacity: 0, y: 6, scale: 0.97 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute top-full right-0 mt-2 w-72 bg-white rounded-2xl border-[1.5px] border-gray-200 shadow-[0_20px_60px_rgba(0,0,0,0.15)] overflow-hidden z-50"
+                transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute top-full right-0 mt-1 w-56 bg-white rounded-xl border border-[var(--border)] shadow-lg overflow-hidden z-50"
               >
-                <div className="p-2">
-                  {workLinks.map((item) => {
-                    const Icon = item.icon;
-                    return (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        onClick={() => setWorkOpen(false)}
-                        className="flex items-start gap-3 p-3 rounded-xl hover:bg-orange-50 group transition-colors"
-                      >
-                        <div className="w-9 h-9 rounded-lg bg-orange-100 group-hover:bg-orange-200 flex items-center justify-center shrink-0 transition-colors">
-                          <Icon className="w-4 h-4 text-orange-500" />
-                        </div>
-                        <div>
-                          <div className="font-semibold text-gray-900 text-sm">{item.label}</div>
-                          <div className="text-gray-500 text-xs mt-0.5">{item.desc}</div>
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </div>
-                <div className="border-t border-gray-100 p-3">
-                  <Link
-                    href="/contact"
-                    onClick={() => setWorkOpen(false)}
-                    className="flex items-center justify-center gap-2 bg-orange-500 text-white font-bold text-sm py-2.5 px-4 rounded-xl hover:bg-orange-600 transition-colors"
-                  >
-                    Start a Project →
-                  </Link>
+                <div className="p-1.5">
+                  {workLinks.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setWorkOpen(false)}
+                      className="flex flex-col gap-0.5 p-3 rounded-lg hover:bg-orange-50 group transition-colors"
+                    >
+                      <div className="font-medium text-[var(--navy)] text-sm">{item.label}</div>
+                      <div className="text-[var(--text)] text-xs">{item.desc}</div>
+                    </Link>
+                  ))}
                 </div>
               </motion.div>
             )}
           </div>
 
-          <div className="ml-4">
-            <Link
-              href="/contact"
-              className="bg-orange-500 text-white font-bold py-2.5 px-6 rounded-full border-[1.5px] border-orange-400 shadow-[3px_3px_0px_0px_rgba(26,26,26,0.4)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(26,26,26,0.4)] transition-all text-sm"
-            >
-              Contact
-            </Link>
-          </div>
+          <Link
+            href="/contact"
+            className="ml-4 bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:opacity-90 transition-opacity"
+          >
+            Contact
+          </Link>
         </div>
 
-        {/* Mobile toggle */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 text-white hover:text-orange-400 transition-colors"
+          className="md:hidden p-2 text-[var(--navy)] hover:text-[var(--orange)] transition-colors"
           aria-label="Toggle menu"
         >
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
-      {/* Mobile menu */}
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0, y: -10 }}
+          initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="md:hidden bg-blue-600 border-t border-white/10 px-6 py-8 flex flex-col gap-2"
+          className="md:hidden bg-white border-t border-[var(--border)] px-6 py-6 flex flex-col gap-1"
         >
           {mainLinks.map((link) => (
             <Link
@@ -187,23 +154,21 @@ export function Navbar() {
               href={link.href}
               onClick={() => setIsOpen(false)}
               className={cn(
-                "text-lg font-bold py-2.5 px-4 rounded-xl transition-all",
-                isActive(link.href)
-                  ? "text-orange-400 bg-orange-500/10"
-                  : "text-white hover:text-orange-400 hover:bg-white/5"
+                "text-base font-medium py-2.5 px-4 rounded-lg transition-all text-[var(--text)] hover:text-[var(--navy)] hover:bg-gray-50",
+                isActive(link.href) && "text-[var(--navy)] font-semibold bg-gray-50"
               )}
             >
               {link.label}
             </Link>
           ))}
-          <div className="border-t border-white/10 pt-4 mt-2">
-            <div className="text-xs font-bold uppercase tracking-widest text-orange-400/60 mb-2 px-4">Our Work</div>
+          <div className="border-t border-[var(--border)] pt-3 mt-2">
+            <div className="text-xs font-medium text-[var(--text)] mb-1 px-4">Work</div>
             {workLinks.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className="block text-white/80 hover:text-orange-400 py-2.5 px-4 rounded-lg hover:bg-white/5 font-medium transition-all"
+                className="block text-[var(--text)] hover:text-[var(--navy)] py-2.5 px-4 rounded-lg hover:bg-gray-50 text-sm transition-all"
               >
                 {item.label}
               </Link>
@@ -213,9 +178,9 @@ export function Navbar() {
             <Link
               href="/contact"
               onClick={() => setIsOpen(false)}
-              className="block bg-orange-500 text-white font-bold py-3.5 px-8 rounded-full text-center border-[1.5px] border-orange-400 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)] transition-all text-base"
+              className="block bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg text-center hover:opacity-90 transition-opacity"
             >
-              Start a Project
+              Contact Us
             </Link>
           </div>
         </motion.div>

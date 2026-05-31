@@ -2,63 +2,39 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --background: #F3EFE6;
-  --foreground: #1a1a1a;
+  --bg: #F9F7F4;
+  --navy: #1a2744;
+  --orange: #F97316;
+  --text: #4B5563;
+  --border: #E5E7EB;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: "SF-Pro-Display", Roboto, sans-serif;
-  --animate-marquee: marquee 25s linear infinite;
-  --animate-float: float 4s ease-in-out infinite;
-  --animate-spin-slow: spin-slow 12s linear infinite;
-
-  @keyframes marquee {
-    0% { transform: translateX(0%); }
-    100% { transform: translateX(-100%); }
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-  }
-
-  @keyframes spin-slow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  --color-surface-base: #000000;
-  --color-text-secondary: #ffffff;
-  --color-text-tertiary: #69727d;
-  --color-text-inverse: #171614;
-  --color-surface-raised: #8ce6db;
-  --color-surface-strong: #eef0f2;
-
-  --radius-xs: 5px;
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 20px;
-  --radius-xl: 50px;
-
-  --shadow-1: rgba(0, 0, 0, 0.024) 0px 2px 1px 0px inset;
-  --shadow-2: rgb(0, 0, 0) 3px 3px 0px 1px;
-  --shadow-3: rgb(0, 0, 0) 7px 5px 0px 1px;
-  --shadow-4: rgb(0, 0, 0) 2.14561px 1.01499px 0px 1px;
-
-  --motion-duration-instant: 200ms;
-  --motion-duration-fast: 300ms;
-  --motion-duration-normal: 400ms;
+  --color-background: var(--bg);
+  --color-navy: #1a2744;
+  --color-orange: #F97316;
+  --color-soft: #F9F7F4;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-inter), sans-serif;
   font-size: 16px;
-  font-weight: 400;
-  line-height: normal;
+  line-height: 1.7;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), serif;
+  color: var(--navy);
+  line-height: 1.2;
+}
 
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}

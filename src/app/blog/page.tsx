@@ -3,6 +3,7 @@ import { db } from '@/db';
 import { posts } from '@/db/schema';
 import { desc, eq } from 'drizzle-orm';
 import { Metadata } from 'next';
+import * as motion from 'framer-motion/client';
 
 export const dynamic = 'force-dynamic';
 
@@ -16,39 +17,39 @@ export default async function BlogPage() {
 
   return (
     <div className="flex flex-col w-full">
-      <section className="bg-[#1a2744] py-28 px-6 md:px-12 border-b-[1.5px] border-gray-900">
-        <div className="max-w-[1200px] mx-auto text-center">
-          <h1 className="font-fjalla text-6xl md:text-8xl text-white uppercase leading-[0.88] mb-6">
-            Our Blog
-          </h1>
-          <p className="text-xl text-blue-200 font-medium max-w-2xl mx-auto">
+      <section className="max-w-[1200px] mx-auto px-6 pt-20 md:pt-28 pb-16 md:pb-24 w-full">
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl text-[var(--navy)] leading-[1.15] mb-6">Our Blog</h1>
+          <p className="text-lg md:text-xl text-[var(--text)] leading-relaxed max-w-2xl">
             Insights, strategies, and stories from the team.
           </p>
-        </div>
+        </motion.div>
       </section>
 
-      <section className="bg-white py-24 px-6 md:px-12 max-w-[1200px] mx-auto w-full">
-        {allPosts.length === 0 ? (
-          <p className="text-gray-500 text-center py-20">No posts yet. Check back soon.</p>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {allPosts.map((post) => (
-              <Link key={post.id} href={`/blog/${post.slug}`}
-                className="group bg-white rounded-2xl border-[1.5px] border-gray-900 shadow-[4px_4px_0px_0px_rgba(26,26,26,1)] overflow-hidden hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[8px_8px_0px_0px_rgba(26,26,26,1)] transition-all"
-              >
-                <div className="p-6">
-                  <p className="text-xs text-gray-400 mb-2">{post.createdAt?.slice(0, 10)}</p>
-                  <h3 className="font-fjalla text-xl uppercase text-gray-900 group-hover:text-blue-600 transition-colors mb-2">
-                    {post.title}
-                  </h3>
-                  {post.excerpt && (
-                    <p className="text-gray-600 text-sm leading-relaxed">{post.excerpt}</p>
-                  )}
-                </div>
-              </Link>
-            ))}
-          </div>
-        )}
+      <section className="border-t border-[var(--border)]">
+        <div className="max-w-[1200px] mx-auto px-6 py-16 md:py-20 w-full">
+          {allPosts.length === 0 ? (
+            <p className="text-[var(--text)] text-center py-20">No posts yet. Check back soon.</p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {allPosts.map((post, i) => (
+                <motion.div key={post.id} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}>
+                  <Link href={`/blog/${post.slug}`}
+                    className="block border border-[var(--border)] bg-white rounded-lg p-6 hover:border-[var(--navy)] transition-colors h-full"
+                  >
+                    <p className="text-xs text-[var(--text)] mb-2">{post.createdAt?.slice(0, 10)}</p>
+                    <h3 className="text-lg text-[var(--navy)] font-[var(--font-playfair)] mb-2 leading-snug">
+                      {post.title}
+                    </h3>
+                    {post.excerpt && (
+                      <p className="text-sm text-[var(--text)] leading-relaxed">{post.excerpt}</p>
+                    )}
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          )}
+        </div>
       </section>
     </div>
   );

@@ -4,6 +4,7 @@ import { db } from '@/db';
 import { posts } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { Metadata } from 'next';
+import * as motion from 'framer-motion/client';
 
 export const dynamic = 'force-dynamic';
 
@@ -23,24 +24,26 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <div className="flex flex-col w-full">
-      <section className="bg-[#1a2744] py-28 px-6 md:px-12 border-b-[1.5px] border-gray-900">
-        <div className="max-w-[800px] mx-auto">
-          <Link href="/blog" className="text-blue-300 hover:text-orange-400 text-sm font-medium mb-6 inline-block transition-colors">
-            &larr; Back to Blog
+      <section className="max-w-[1200px] mx-auto px-6 pt-20 md:pt-28 pb-16 md:pb-24 w-full">
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+          <Link href="/blog" className="inline-flex items-center gap-1 text-sm text-[var(--text)] hover:text-[var(--navy)] transition-colors mb-6 group">
+            <span className="group-hover:-translate-x-0.5 transition-transform">&larr;</span> Back to Blog
           </Link>
-          <h1 className="font-fjalla text-5xl md:text-7xl text-white uppercase leading-[0.9] mb-4">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl text-[var(--navy)] leading-[1.15] mb-4">
             {post.title}
           </h1>
           {post.excerpt && (
-            <p className="text-lg text-blue-200 font-medium">{post.excerpt}</p>
+            <p className="text-[var(--text)] text-lg">{post.excerpt}</p>
           )}
-          <p className="text-sm text-blue-300/70 mt-4">{post.createdAt?.slice(0, 10)}</p>
-        </div>
+          <p className="text-sm text-[var(--text)] mt-4">{post.createdAt?.slice(0, 10)}</p>
+        </motion.div>
       </section>
 
-      <section className="bg-white py-16 px-6 md:px-12">
-        <div className="max-w-[800px] mx-auto prose prose-lg prose-gray">
-          <div dangerouslySetInnerHTML={{ __html: post.content }} />
+      <section className="border-t border-[var(--border)]">
+        <div className="max-w-[800px] mx-auto px-6 py-16">
+          <div className="prose prose-gray max-w-none prose-headings:font-[var(--font-playfair)] prose-headings:text-[var(--navy)] prose-a:text-[var(--navy)] prose-a:no-underline hover:prose-a:underline">
+            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+          </div>
         </div>
       </section>
     </div>

@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
-import { Roboto, Fjalla_One } from 'next/font/google';
+import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import { siteConfig } from '@/config/site';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 
-const roboto = Roboto({ weight: ['400', '500', '700'], subsets: ['latin'], variable: '--font-roboto' });
-const fjallaOne = Fjalla_One({ weight: '400', subsets: ['latin'], variable: '--font-fjalla' });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' });
 
 export const metadata: Metadata = {
   title: {
@@ -29,61 +29,32 @@ export const metadata: Metadata = {
       url: siteConfig.url,
     }
   ],
-  creator: siteConfig.name,
-  icons: {
-    icon: '/favicon.svg',
-    shortcut: '/favicon.svg',
-    apple: '/favicon.svg',
-  },
   openGraph: {
     type: "website",
     locale: "en_IN",
     url: siteConfig.url,
+    siteName: siteConfig.name,
     title: siteConfig.name,
     description: siteConfig.description,
-    siteName: siteConfig.name,
+    images: [siteConfig.ogImage],
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: ["https://onebridgemarketing.in/og.jpg"],
-    creator: "@onebridgemktg",
+    images: [siteConfig.ogImage],
   },
+  robots: { index: true, follow: true },
+  metadataBase: new URL(siteConfig.url),
+  alternates: { canonical: '/' },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "MarketingAgency",
-    "name": siteConfig.name,
-    "image": siteConfig.ogImage,
-    "url": siteConfig.url,
-    "email": siteConfig.contact.email,
-    "telephone": siteConfig.contact.phone,
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "IN"
-    },
-    "description": siteConfig.description,
-    "priceRange": "$$$"
-  };
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${roboto.variable} ${fjallaOne.variable}`}>
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      </head>
-      <body className="min-h-screen flex flex-col font-sans antialiased overflow-x-hidden bg-background text-foreground">
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+      <body className="min-h-screen flex flex-col antialiased overflow-x-hidden bg-soft text-[#4B5563]">
         <Navbar />
-        {children}
+        <main className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>
