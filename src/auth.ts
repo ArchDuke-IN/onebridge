@@ -11,21 +11,38 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
+        console.log('[auth] authorize called', credentials?.email ? 'email present' : 'no email');
         try {
-          if (!credentials?.email || !credentials?.password) return null;
+          if (!credentials?.email || !credentials?.password) {
+            console.log('[auth] missing credentials');
+            return null;
+          }
 
-          const { db } = await import('./db');
-          const { users } = await import('./db/schema');
+          console.log('[auth] importing db');
+          const dbMod = await import('./db');
+          console.log('[auth] db imported, has db?', !!dbMod.db);
+          const schemaMod = await import('./db/schema');
+          console.log('[auth] schema imported, has users?', !!schemaMod.users);
           const { eq } = await import('drizzle-orm');
 
-          const rows = await db.select().from(users).where(eq(users.email, credentials.email as string));
-          const user = rows[0];
-          if (!user) return null;
+          console.log('[auth] querying for user:', credentials.email);
+          const rows = await dbMod.db.select().from(schemaMod.users).where(eq(schemaMod.users.email, credentials.email as string));
+          console.log('[auth] query result rows:', rows?.length);
 
+          const user = rows?.[0];
+          if (!user) {
+            console.log('[auth] user not found');
+            return null;
+          }
+
+          console.log('[auth] comparing password');
           const valid = await compare(credentials.password as string, user.password);
+          console.log('[auth] password valid:', valid);
           if (!valid) return null;
 
-          return { id: String(user.id), name: user.name, email: user.email };
+          const result = { id: String(user.id), name: user.name, email: user.email };
+          console.log('[auth] authorized:', result.email);
+          return result;
         } catch (err) {
           console.error('[auth] authorize error:', err);
           return null;
