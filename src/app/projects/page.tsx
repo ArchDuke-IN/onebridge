@@ -59,7 +59,7 @@ const serviceDefaults = [
   { key: 'project_influencer', name: 'Influencer Marketing' },
 ];
 
-const fadeUp = { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: "-60px" }, transition: { duration: 0.5 } };
+const fadeUp = { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: "-60px" }, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const } };
 
 export default async function WorkPage() {
   const imageRows = await db.select().from(siteImages).orderBy(asc(siteImages.key));
@@ -87,9 +87,9 @@ export default async function WorkPage() {
               { val: '40+', label: 'Campaigns Launched' },
               { val: '100%', label: 'Done-For-You' },
             ].map((m, i) => (
-              <div key={i}>
-                <div className="text-3xl md:text-4xl text-[var(--orange)] font-semibold font-[var(--font-playfair)] mb-1">{m.val}</div>
-                <div className="text-xs text-[var(--text)] uppercase tracking-wider">{m.label}</div>
+              <div key={i} className="cursor-default">
+                <div className="text-3xl md:text-4xl text-[var(--orange)] font-semibold font-[var(--font-satoshi)] mb-1">{m.val}</div>
+                <div className="text-xs md:text-[13px] text-[var(--text)] uppercase tracking-wider">{m.label}</div>
               </div>
             ))}
           </div>
@@ -108,10 +108,10 @@ export default async function WorkPage() {
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
                 className="grid grid-cols-1 md:grid-cols-2 gap-0 rounded-lg border border-[var(--border)] bg-white overflow-hidden"
               >
-                <div className="bg-[var(--navy)] p-8 md:p-10 flex flex-col justify-between min-h-[260px]">
+                <div className="bg-[var(--navy)] p-8 md:p-10 flex flex-col justify-between min-h-[200px] md:min-h-[260px]">
                   <div>
-                    <span className="inline-block text-xs text-white/60 uppercase tracking-widest mb-3">{cs.label}</span>
-                    <h3 className="text-3xl md:text-4xl text-white font-[var(--font-playfair)] leading-tight">{cs.title}</h3>
+                    <span className="inline-block text-xs text-white/70 uppercase tracking-widest mb-3">{cs.label}</span>
+                    <h3 className="text-3xl md:text-4xl text-white font-[var(--font-satoshi)] leading-tight">{cs.title}</h3>
                   </div>
                   <div className="mt-6">
                     <span className="inline-block bg-[var(--orange)] text-white text-sm font-medium py-1.5 px-4 rounded">{cs.result}</span>
@@ -130,11 +130,11 @@ export default async function WorkPage() {
                   </div>
                   <div className="mt-6">
                     {cs.slug ? (
-                      <Link href={`/case-studies/${cs.slug}`} className="bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:opacity-90 transition-opacity inline-block">
+                      <Link href={`/case-studies/${cs.slug}`} className="bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:bg-[#233558] transition-colors inline-block cursor-pointer">
                         Read Case Study &rarr;
                       </Link>
                     ) : (
-                      <span className="text-sm text-gray-400 border border-dashed border-gray-300 px-3 py-1.5 rounded">Coming Soon</span>
+                      <span className="text-sm text-gray-400 border border-dashed border-gray-300 px-3 py-1.5 rounded cursor-default">Coming Soon</span>
                     )}
                   </div>
                 </div>
@@ -157,7 +157,7 @@ export default async function WorkPage() {
                 <motion.div key={i} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
                   className="rounded-lg border border-[var(--border)] bg-white overflow-hidden"
                 >
-                  <div className="h-32 bg-[var(--navy)] flex items-center justify-center text-white/30 text-xs">
+                  <div className="h-32 bg-[var(--navy)] flex items-center justify-center text-white/70 text-xs">
                     {svc.name}
                   </div>
                   <div className="p-3.5">
@@ -178,10 +178,10 @@ export default async function WorkPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {testimonials.map((t, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                className="border border-[var(--border)] bg-white rounded-lg p-6 flex flex-col justify-between"
+                className="border border-[var(--border)] bg-white rounded-lg p-6 flex flex-col justify-between cursor-default"
               >
                 <div>
-                  <div className="text-[var(--orange)] text-2xl mb-2 font-[var(--font-playfair)]">&ldquo;</div>
+                  <div className="text-[var(--orange)] text-2xl mb-2 font-[var(--font-satoshi)]">&ldquo;</div>
                   <p className="text-sm text-[var(--text)] leading-relaxed mb-6">{t.quote}</p>
                 </div>
                 <div>
@@ -194,11 +194,11 @@ export default async function WorkPage() {
         </div>
       </section>
 
-      <section className="border-t border-[var(--border)] bg-[var(--navy)]">
+      <section className="bg-[var(--navy)]">
         <div className="max-w-[1200px] mx-auto px-6 py-16 md:py-20 text-center w-full">
-          <h2 className="text-2xl md:text-3xl text-white mb-4 font-[var(--font-playfair)]">Ready to Build Your Bridge?</h2>
-          <p className="text-white/60 text-sm mb-8">Start with a free digital audit. No commitment, just clarity.</p>
-          <Link href="/contact" className="border border-white/30 text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:bg-white/10 transition-colors inline-block">
+          <h2 className="text-2xl md:text-3xl text-white font-bold mb-4">Ready to Build Your Bridge?</h2>
+          <p className="text-white/80 text-sm font-medium mb-8">Start with a free digital audit. No commitment, just clarity.</p>
+          <Link href="/contact" className="border border-white/30 text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:bg-white/10 transition-colors inline-block cursor-pointer">
             Get Your Free Audit
           </Link>
         </div>

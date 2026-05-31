@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import * as motion from "framer-motion/client";
 
@@ -8,137 +9,269 @@ const fadeUp = {
   transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
 };
 
+const statItems = [
+  { val: "100+", label: "Projects Delivered" },
+  { val: "99%", label: "Client Satisfaction" },
+];
+
 export default function Home() {
   return (
     <div className="flex flex-col w-full">
 
-      {/* Hero */}
-      <section className="max-w-[1200px] mx-auto px-6 pt-20 md:pt-28 pb-16 md:pb-24 w-full">
-        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }} className="max-w-3xl">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl text-[var(--navy)] leading-[1.15] mb-6">
-            Your Complete Digital Growth Partner
-          </h1>
-          <p className="text-lg md:text-xl text-[var(--text)] leading-relaxed mb-8 max-w-2xl">
-            We handle everything online so you can focus on running your business. Strategy, execution, results — one team, one mission.
+      {/* Mobile hero */}
+      <section className="block md:hidden relative w-full overflow-hidden bg-[var(--background)] pt-12 pb-10">
+        <div className="max-w-[1200px] mx-auto px-6 flex flex-col gap-5">
+          <div className="relative">
+            <span className="text-[2.5rem] font-[var(--font-satoshi)] text-[var(--navy)] leading-[0.85] font-bold tracking-tight block">
+              ONE
+            </span>
+          </div>
+
+          <p className="text-[var(--text)] text-[15px] leading-relaxed">
+            We build functional, high-earning marketing systems. You run your business.
           </p>
-          <div className="flex flex-wrap gap-4">
-            <Link href="/contact" className="bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:opacity-90 transition-opacity">
-              Start Your Growth
-            </Link>
-            <Link href="/projects" className="bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:opacity-90 transition-opacity">
-              View Our Work
-            </Link>
-          </div>
-        </motion.div>
-      </section>
 
-      {/* Problem + Solution flow */}
-      <section className="border-t border-[var(--border)]">
-        <div className="max-w-[1200px] mx-auto px-6 py-16 md:py-20 w-full">
-          <motion.div {...fadeUp} className="max-w-2xl mb-16">
-            <h2 className="text-2xl md:text-3xl text-[var(--navy)] mb-4">
-              The Problem
-            </h2>
-            <p className="text-[var(--text)] leading-relaxed">
-              Small businesses don&apos;t ignore their online presence by choice. They&apos;re too busy running the business to do it right — and hiring a full team is expensive.
-            </p>
-          </motion.div>
+          <Link href="/contact" className="bg-[var(--navy)] text-white text-sm font-medium py-3 px-6 rounded-lg hover:bg-[#233558] transition-colors cursor-pointer w-fit">
+            Get Started
+          </Link>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
-            {[
-              { title: "No Time", desc: "10-14 hour days leave zero room for marketing." },
-              { title: "No Strategy", desc: "Posting without a plan is just noise." },
-              { title: "No Team", desc: "Hiring specialists is expensive and complex." },
-              { title: "No Results", desc: "Money spent without accountability is wasted." },
-            ].map((item, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="p-6 rounded-lg border border-[var(--border)] bg-white">
-                <div className="text-xl text-[var(--orange)] font-semibold mb-2 font-[var(--font-playfair)]">{item.title}</div>
-                <p className="text-sm text-[var(--text)] leading-relaxed">{item.desc}</p>
-              </motion.div>
-            ))}
+          <div className="w-full max-w-[220px] aspect-square relative mx-auto my-2">
+            <Image src="/images/hero-illustration.png" alt="Two figures representing brand and business collaboration" fill priority sizes="220px" className="object-contain" />
           </div>
 
-          <motion.div {...fadeUp} className="p-8 md:p-10 rounded-lg border border-[var(--border)] bg-[var(--navy)] text-white">
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-              <div>
-                <h3 className="text-xl md:text-2xl text-white mb-2">One Bridge solves every single one of these.</h3>
-                <p className="text-white/70 text-sm">That&apos;s what we were built for.</p>
+          <div className="flex items-center gap-5">
+            {statItems.map((s) => (
+              <div key={s.val} className="flex flex-col">
+                <span className="text-xl font-[var(--font-satoshi)] text-[var(--orange)] font-semibold leading-none">{s.val}</span>
+                <span className="text-[11px] text-[var(--text)] uppercase tracking-widest mt-1">{s.label}</span>
               </div>
-              <Link href="/about" className="border border-white/30 text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:bg-white/10 transition-colors whitespace-nowrap">
-                How We Do It
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="border-t border-[var(--border)]">
-        <div className="max-w-[1200px] mx-auto px-6 py-16 md:py-20 w-full">
-          <motion.div {...fadeUp} className="mb-12">
-            <h2 className="text-2xl md:text-3xl text-[var(--navy)] mb-2">Growth Impact</h2>
-            <p className="text-[var(--text)]">Real metrics from real campaigns.</p>
-          </motion.div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-            {[
-              { val: "300%", label: "Avg reach increase" },
-              { val: "5x", label: "Lead flow growth" },
-              { val: "12+", label: "Hours saved per week" },
-              { val: "100%", label: "Done-for-you" },
-            ].map((s, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="p-6 rounded-lg border border-[var(--border)] bg-white text-center">
-                <div className="text-3xl md:text-4xl text-[var(--orange)] font-semibold mb-1 font-[var(--font-playfair)]">{s.val}</div>
-                <div className="text-xs text-[var(--text)]">{s.label}</div>
-              </motion.div>
             ))}
           </div>
+
+          <span className="text-[2rem] font-[var(--font-satoshi)] text-[var(--orange)] leading-[0.85] font-bold tracking-tight block">
+            BRIDGE
+          </span>
         </div>
       </section>
 
-      {/* Services */}
-      <section className="border-t border-[var(--border)]">
-        <div className="max-w-[1200px] mx-auto px-6 py-16 md:py-20 w-full">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-            <motion.div {...fadeUp}>
-              <h2 className="text-2xl md:text-3xl text-[var(--navy)] mb-4">Everything You Need. Under One Roof.</h2>
-              <p className="text-[var(--text)] leading-relaxed mb-6">
-                All services customised to your goals and delivered end-to-end by one dedicated team.
+      {/* Desktop hero */}
+      <section className="hidden md:block relative w-full min-h-[85vh] overflow-hidden bg-[var(--background)]">
+        <div className="max-w-[1200px] mx-auto px-6 w-full h-full relative" style={{ minHeight: '85vh' }}>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute top-12 left-12 pointer-events-none select-none z-0"
+          >
+            <span className="text-[clamp(5rem,14vw,12rem)] font-[var(--font-satoshi)] text-[var(--navy)] leading-[0.85] block font-bold tracking-tight">
+              ONE
+            </span>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute bottom-12 right-12 pointer-events-none select-none z-0"
+          >
+            <span className="text-[clamp(3rem,10vw,10rem)] font-[var(--font-satoshi)] text-[var(--orange)] leading-[0.85] block font-bold tracking-tight">
+              BRIDGE
+            </span>
+          </motion.div>
+
+          <div className="relative z-[2] flex flex-col items-center justify-center h-full min-h-[85vh] py-16 lg:py-0 lg:static lg:inset-auto lg:block lg:min-h-0">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="max-w-[320px] text-center lg:text-left lg:absolute lg:top-1/2 lg:left-12 lg:-translate-y-1/2"
+            >
+              <p className="text-[var(--text)] text-lg leading-relaxed mb-6">
+                We build functional, high-earning marketing systems. You run your business.
               </p>
-              <Link href="/services" className="bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:opacity-90 transition-opacity inline-block">
-                View All Services
+              <Link
+                href="/contact"
+                className="bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:bg-[#233558] transition-colors inline-block cursor-pointer"
+              >
+                Get Started
               </Link>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full max-w-[350px] lg:max-w-[480px] aspect-square relative pointer-events-none my-10 lg:my-0 lg:absolute lg:inset-0 lg:mx-auto lg:flex lg:items-center lg:justify-center"
+            >
+              <Image
+                src="/images/hero-illustration.png"
+                alt="Two figures representing brand and business collaboration"
+                fill
+                priority
+                sizes="480px"
+                className="object-contain"
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="hidden lg:block lg:absolute lg:top-1/3 lg:right-12 lg:max-w-[220px]"
+            >
+              <p className="text-sm text-[var(--text)] leading-relaxed">
+                One team handling your entire digital presence. Strategy, execution, results — delivered end-to-end.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              className="hidden lg:block lg:absolute lg:bottom-6 lg:left-12"
+            >
+              <div className="flex items-center gap-8">
+                {statItems.map((s) => (
+                  <div key={s.val} className="flex flex-col">
+                    <span className="text-3xl font-[var(--font-satoshi)] text-[var(--orange)] font-semibold leading-none">{s.val}</span>
+                    <span className="text-[11px] text-[var(--text)] uppercase tracking-widest mt-1">{s.label}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+        </div>
+      </section>
+
+      <main className="flex flex-col w-full">
+
+        <section className="border-t border-[var(--border)]">
+          <div className="max-w-[1200px] mx-auto px-6 py-16 md:py-20 w-full">
+            <motion.div {...fadeUp} className="max-w-2xl mb-16">
+              <h2 className="text-2xl md:text-3xl text-[var(--navy)] mb-4">The Problem</h2>
+              <p className="text-[var(--text)] leading-relaxed">
+                Small businesses don&apos;t ignore their online presence by choice. They&apos;re too busy running the business to do it right — and hiring a full team is expensive.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
               {[
-                { name: "Social Media Management", outline: "Strategy, content, posting & engagement." },
-                { name: "Content Creation", outline: "Reels, videos, graphics & branded posts." },
-                { name: "Branding & Identity", outline: "Logos, positioning & visual identity." },
-                { name: "Website Development", outline: "Fast, conversion-focused websites." },
-              ].map((srv, i) => (
-                <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="p-5 rounded-lg border border-[var(--border)] bg-white hover:border-[var(--navy)] transition-colors">
-                  <div className="font-medium text-[var(--navy)] mb-1.5">{srv.name}</div>
-                  <p className="text-sm text-[var(--text)]">{srv.outline}</p>
+                { title: "No Time", desc: "10-14 hour days leave zero room for marketing." },
+                { title: "No Strategy", desc: "Posting without a plan is just noise." },
+                { title: "No Team", desc: "Hiring specialists is expensive and complex." },
+                { title: "No Results", desc: "Money spent without accountability is wasted." },
+              ].map((item, i) => (
+                <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="p-6 rounded-lg border border-[var(--border)] bg-white cursor-default">
+                  <div className="text-xl text-[var(--orange)] font-semibold mb-2 font-[var(--font-satoshi)]">{item.title}</div>
+                  <p className="text-sm text-[var(--text)] leading-relaxed">{item.desc}</p>
                 </motion.div>
               ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA */}
-      <section className="border-t border-[var(--border)]">
-        <div className="max-w-[1200px] mx-auto px-6 py-16 md:py-20 w-full text-center">
-          <motion.div {...fadeUp}>
-            <h2 className="text-2xl md:text-3xl text-[var(--navy)] mb-4">Ready to Build Your Bridge?</h2>
-            <p className="text-[var(--text)] mb-8 max-w-md mx-auto">Let&apos;s talk about what your business needs and how we can help.</p>
-            <Link href="/contact" className="bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:opacity-90 transition-opacity inline-block">
-              Get Your Free Audit
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+        <section className="bg-[var(--navy)]">
+          <div className="max-w-[1200px] mx-auto px-6 py-14 md:py-16 w-full">
+            <motion.div {...fadeUp} className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
+              <div>
+                <h2 className="text-xl md:text-2xl text-white font-bold mb-1.5">One Bridge solves every single one of these.</h2>
+                <p className="text-white/80 text-sm font-medium">That&apos;s what we were built for.</p>
+              </div>
+              <Link href="/about" className="border border-white/30 text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:bg-white/10 transition-colors whitespace-nowrap shrink-0">
+                How We Do It
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+
+        <section className="border-t border-[var(--border)]">
+          <div className="max-w-[1200px] mx-auto px-6 py-16 md:py-20 w-full">
+            <motion.div {...fadeUp} className="mb-12">
+              <h2 className="text-2xl md:text-3xl text-[var(--navy)] mb-2">Growth Impact</h2>
+              <p className="text-[var(--text)]">Real metrics from real campaigns.</p>
+            </motion.div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+              {[
+                { val: "300%", label: "Avg reach increase" },
+                { val: "5x", label: "Lead flow growth" },
+                { val: "12+", label: "Hours saved per week" },
+                { val: "100%", label: "Done-for-you" },
+              ].map((s, i) => (
+                <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="text-center cursor-default">
+                  <div className="text-3xl md:text-4xl text-[var(--orange)] font-semibold mb-1 font-[var(--font-satoshi)]">{s.val}</div>
+                  <div className="text-xs md:text-[13px] text-[var(--text)] uppercase tracking-wider">{s.label}</div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="border-t border-[var(--border)]">
+          <div className="max-w-[1200px] mx-auto px-6 py-16 md:py-20 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+              <motion.div {...fadeUp}>
+                <h2 className="text-2xl md:text-3xl text-[var(--navy)] mb-4">Everything You Need. Under One Roof.</h2>
+                <p className="text-[var(--text)] leading-relaxed mb-6">
+                  All services customised to your goals and delivered end-to-end by one dedicated team.
+                </p>
+                <Link href="/services" className="bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:bg-[#233558] transition-colors inline-block">
+                  View All Services
+                </Link>
+              </motion.div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {[
+                  { name: "Social Media Management", outline: "Strategy, content, posting & engagement." },
+                  { name: "Content Creation", outline: "Reels, videos, graphics & branded posts." },
+                  { name: "Branding & Identity", outline: "Logos, positioning & visual identity." },
+                  { name: "Website Development", outline: "Fast, conversion-focused websites." },
+                ].map((srv, i) => (
+                <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="p-5 rounded-lg border border-[var(--border)] bg-white hover:border-[var(--navy)] transition-colors cursor-pointer">
+                  <div className="font-medium text-[var(--navy)] mb-1.5">{srv.name}</div>
+                  <p className="text-sm text-[var(--text)]">{srv.outline}</p>
+                </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-t border-[var(--border)]">
+          <div className="max-w-[1200px] mx-auto px-6 py-16 md:py-20 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              <motion.div {...fadeUp}>
+                <h2 className="text-2xl md:text-3xl text-[var(--navy)] mb-4">Ready to Build Your Bridge?</h2>
+                <p className="text-[var(--text)] leading-relaxed mb-6">
+                  Start with a free digital audit. We&apos;ll analyze your current footprint and show you exactly where the gaps are — no commitment, just clarity.
+                </p>
+                <Link href="/contact" className="bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:bg-[#233558] transition-colors inline-block">
+                  Get Your Free Audit
+                </Link>
+              </motion.div>
+
+              <motion.div {...fadeUp} className="space-y-4">
+                {[
+                  { label: "SEO &amp; Website Performance", desc: "Find out why visitors leave and how to keep them." },
+                  { label: "Social Media Presence", desc: "See where your brand stands vs. competitors." },
+                  { label: "Competitor Benchmarking", desc: "Know exactly what they're doing that you're not." },
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-4 items-start p-4 rounded-lg border border-[var(--border)] bg-[var(--background)]">
+                    <div className="w-5 h-5 bg-[var(--orange)] rounded flex items-center justify-center text-white text-xs shrink-0 mt-0.5">&#10003;</div>
+                    <div>
+                      <div className="text-sm font-medium text-[var(--navy)]">{item.label}</div>
+                      <p className="text-xs text-[var(--text)] mt-0.5">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+      </main>
 
     </div>
   );

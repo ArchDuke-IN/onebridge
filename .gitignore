@@ -27,6 +27,7 @@
 
 # stray
 /logo.jpeg.jpeg
+/Image 1.png
 
 # debug
 npm-debug.log*

@@ -1,12 +1,19 @@
 import type { Metadata } from 'next';
-import { Inter, Playfair_Display } from 'next/font/google';
+import { DM_Sans } from 'next/font/google';
+import localFont from 'next/font/local';
 import './globals.css';
 import { siteConfig } from '@/config/site';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' });
+const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans' });
+const satoshi = localFont({
+  src: [
+    { path: '../../public/fonts/satoshi/Satoshi-Variable.woff2', weight: '300 900', style: 'normal' },
+    { path: '../../public/fonts/satoshi/Satoshi-VariableItalic.woff2', weight: '300 900', style: 'italic' },
+  ],
+  variable: '--font-satoshi',
+});
 
 export const metadata: Metadata = {
   title: {
@@ -51,10 +58,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en" className={`${dmSans.variable} ${satoshi.variable}`}>
       <body className="min-h-screen flex flex-col antialiased overflow-x-hidden bg-soft text-[#4B5563]">
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <div className="flex-1 flex flex-col">{children}</div>
         <Footer />
       </body>
     </html>

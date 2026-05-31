@@ -13,7 +13,7 @@ export function Footer() {
                 <path d="M8 24 L16 14 L24 24" stroke="#F97316" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                 <circle cx="16" cy="8" r="2" fill="#1a2744"/>
               </svg>
-              <span className="font-[var(--font-playfair)] text-lg text-[var(--navy)] font-bold">{siteConfig.name}</span>
+              <span className="font-[var(--font-satoshi)] text-lg text-[var(--navy)] font-bold">{siteConfig.name}</span>
             </Link>
             <p className="text-sm text-[var(--text)] leading-relaxed max-w-xs">
               {siteConfig.description}

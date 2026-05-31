@@ -35,10 +35,10 @@ export default async function BlogPage() {
               {allPosts.map((post, i) => (
                 <motion.div key={post.id} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}>
                   <Link href={`/blog/${post.slug}`}
-                    className="block border border-[var(--border)] bg-white rounded-lg p-6 hover:border-[var(--navy)] transition-colors h-full"
+                    className="block border border-[var(--border)] bg-white rounded-lg p-6 hover:border-[var(--navy)] transition-colors h-full cursor-pointer"
                   >
                     <p className="text-xs text-[var(--text)] mb-2">{post.createdAt?.slice(0, 10)}</p>
-                    <h3 className="text-lg text-[var(--navy)] font-[var(--font-playfair)] mb-2 leading-snug">
+                    <h3 className="text-lg text-[var(--navy)] font-[var(--font-satoshi)] mb-2 leading-snug">
                       {post.title}
                     </h3>
                     {post.excerpt && (

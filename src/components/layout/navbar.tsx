@@ -71,7 +71,7 @@ export function Navbar() {
             <path d="M8 24 L16 14 L24 24" stroke="#F97316" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
             <circle cx="16" cy="8" r="2" fill="#1a2744"/>
           </svg>
-          <span className="font-[var(--font-playfair)] text-lg text-[var(--navy)] font-bold tracking-tight">One Bridge</span>
+          <span className="font-[var(--font-satoshi)] text-lg text-[var(--navy)] font-bold tracking-tight">One Bridge</span>
         </Link>
 
         <div className="hidden md:flex items-center gap-1">
@@ -92,7 +92,7 @@ export function Navbar() {
             <button
               onClick={() => setWorkOpen(!workOpen)}
               className={cn(
-                "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150 text-[var(--text)] hover:text-[var(--navy)]",
+                "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150 text-[var(--text)] hover:text-[var(--navy)] cursor-pointer focus-visible:outline-2 focus-visible:outline-[var(--navy)] focus-visible:outline-offset-2",
                 workOpen && "text-[var(--navy)]"
               )}
               aria-expanded={workOpen}
@@ -114,7 +114,7 @@ export function Navbar() {
                       key={item.href}
                       href={item.href}
                       onClick={() => setWorkOpen(false)}
-                      className="flex flex-col gap-0.5 p-3 rounded-lg hover:bg-orange-50 group transition-colors"
+                      className="flex flex-col gap-0.5 p-3 rounded-lg hover:bg-orange-50 group transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-[var(--navy)] focus-visible:outline-offset-2"
                     >
                       <div className="font-medium text-[var(--navy)] text-sm">{item.label}</div>
                       <div className="text-[var(--text)] text-xs">{item.desc}</div>
@@ -127,7 +127,7 @@ export function Navbar() {
 
           <Link
             href="/contact"
-            className="ml-4 bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:opacity-90 transition-opacity"
+            className="ml-4 bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:bg-[#233558] transition-colors"
           >
             Contact
           </Link>
@@ -135,7 +135,7 @@ export function Navbar() {
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 text-[var(--navy)] hover:text-[var(--orange)] transition-colors"
+          className="md:hidden p-2 text-[var(--navy)] hover:text-[var(--orange)] transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-[var(--navy)] focus-visible:outline-offset-2"
           aria-label="Toggle menu"
         >
           {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -178,7 +178,7 @@ export function Navbar() {
             <Link
               href="/contact"
               onClick={() => setIsOpen(false)}
-              className="block bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg text-center hover:opacity-90 transition-opacity"
+              className="block bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg text-center hover:bg-[#233558] transition-colors"
             >
               Contact Us
             </Link>

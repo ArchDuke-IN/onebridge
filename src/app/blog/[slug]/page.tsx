@@ -26,7 +26,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     <div className="flex flex-col w-full">
       <section className="max-w-[1200px] mx-auto px-6 pt-20 md:pt-28 pb-16 md:pb-24 w-full">
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          <Link href="/blog" className="inline-flex items-center gap-1 text-sm text-[var(--text)] hover:text-[var(--navy)] transition-colors mb-6 group">
+          <Link href="/blog" className="inline-flex items-center gap-1 text-sm text-[var(--text)] hover:text-[var(--navy)] transition-colors mb-6 group cursor-pointer">
             <span className="group-hover:-translate-x-0.5 transition-transform">&larr;</span> Back to Blog
           </Link>
           <h1 className="text-3xl md:text-4xl lg:text-5xl text-[var(--navy)] leading-[1.15] mb-4">
@@ -41,7 +41,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
       <section className="border-t border-[var(--border)]">
         <div className="max-w-[800px] mx-auto px-6 py-16">
-          <div className="prose prose-gray max-w-none prose-headings:font-[var(--font-playfair)] prose-headings:text-[var(--navy)] prose-a:text-[var(--navy)] prose-a:no-underline hover:prose-a:underline">
+          <div className="prose prose-gray max-w-none prose-headings:font-[var(--font-satoshi)] prose-headings:text-[var(--navy)] prose-a:text-[var(--navy)] prose-a:no-underline hover:prose-a:underline">
             <div dangerouslySetInnerHTML={{ __html: post.content }} />
           </div>
         </div>

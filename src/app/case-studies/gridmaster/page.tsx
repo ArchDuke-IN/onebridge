@@ -14,14 +14,14 @@ const timeline = [
   { month: 'Month 4–6', title: 'Scale & Optimize', desc: 'Doubled ad budget as ROAS stabilized. Organic traffic compounding. Lead volume at 5x baseline.' },
 ];
 
-const fadeUp = { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: "-60px" }, transition: { duration: 0.5 } };
+const fadeUp = { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: "-60px" }, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const } };
 
 export default function GridmasterCaseStudy() {
   return (
     <div className="flex flex-col w-full">
 
       <section className="max-w-[1200px] mx-auto px-6 pt-20 md:pt-28 pb-16 md:pb-24 w-full">
-        <Link href="/projects" className="inline-flex items-center gap-1 text-sm text-[var(--text)] hover:text-[var(--navy)] transition-colors mb-8 group">
+        <Link href="/projects" className="inline-flex items-center gap-1 text-sm text-[var(--text)] hover:text-[var(--navy)] transition-colors mb-8 group cursor-pointer">
           <span className="group-hover:-translate-x-0.5 transition-transform">&larr;</span> Back to Our Work
         </Link>
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
@@ -47,8 +47,8 @@ export default function GridmasterCaseStudy() {
               { val: '6mo', label: 'Time to Results' },
             ].map((m, i) => (
               <div key={i}>
-                <div className="text-3xl md:text-4xl text-[var(--orange)] font-semibold font-[var(--font-playfair)] mb-1">{m.val}</div>
-                <div className="text-xs text-[var(--text)] uppercase tracking-wider">{m.label}</div>
+                <div className="text-3xl md:text-4xl text-[var(--orange)] font-semibold font-[var(--font-satoshi)] mb-1">{m.val}</div>
+                <div className="text-xs md:text-[13px] text-[var(--text)] uppercase tracking-wider">{m.label}</div>
               </div>
             ))}
           </div>
@@ -63,15 +63,15 @@ export default function GridmasterCaseStudy() {
               <div className="lg:sticky top-24 space-y-4">
                 <div className="border border-[var(--border)] bg-white rounded-lg p-5">
                   <div className="text-xs uppercase tracking-wider text-[var(--text)] mb-2">Client</div>
-                  <div className="text-lg text-[var(--navy)] font-[var(--font-playfair)]">GridMaster</div>
+                  <div className="text-lg text-[var(--navy)] font-[var(--font-satoshi)]">GridMaster</div>
                   <div className="text-sm text-[var(--text)]">B2B SaaS Platform</div>
                 </div>
                 <div className="border border-[var(--border)] bg-white rounded-lg p-5">
                   <div className="text-xs uppercase tracking-wider text-[var(--text)] mb-2">Duration</div>
-                  <div className="text-lg text-[var(--navy)] font-[var(--font-playfair)]">6 Months</div>
+                  <div className="text-lg text-[var(--navy)] font-[var(--font-satoshi)]">6 Months</div>
                 </div>
-                <div className="border border-[var(--border)] bg-[var(--navy)] text-white rounded-lg p-5">
-                  <div className="text-xs uppercase tracking-wider text-white/60 mb-2">Services Used</div>
+                <div className="bg-[var(--navy)] rounded-lg p-5">
+                  <div className="text-xs uppercase tracking-wider text-white/70 mb-2">Services Used</div>
                   <ul className="space-y-1.5 text-sm">
                     {['UI/UX Redesign', 'Meta Ads', 'Google Ads', 'SEO', 'Email Automation', 'Brand Identity'].map(s => (
                       <li key={s} className="flex items-center gap-2"><span className="text-[var(--orange)]">&#10003;</span>{s}</li>
@@ -95,9 +95,9 @@ export default function GridmasterCaseStudy() {
                     { stat: '$4k/mo', label: 'Untracked Ad Spend' },
                     { stat: '<1%', label: 'Conversion Rate' },
                   ].map((s, i) => (
-                    <div key={i} className="border border-red-200 bg-red-50 rounded-lg p-4 text-center">
-                      <div className="text-xl text-red-500 font-semibold font-[var(--font-playfair)] mb-0.5">{s.stat}</div>
-                      <div className="text-xs text-red-700 uppercase tracking-wider">{s.label}</div>
+                    <div key={i} className="border border-red-200 bg-red-50 rounded-lg p-4 text-center cursor-default">
+                      <div className="text-xl text-red-500 font-semibold font-[var(--font-satoshi)] mb-0.5">{s.stat}</div>
+                      <div className="text-xs md:text-[13px] text-red-700 uppercase tracking-wider">{s.label}</div>
                     </div>
                   ))}
                 </div>
@@ -112,7 +112,7 @@ export default function GridmasterCaseStudy() {
                     { title: 'Aggressive Paid Funnel', desc: 'Launched top-of-funnel Meta campaigns for awareness and bottom-of-funnel Google campaigns for high-intent searches.' },
                     { title: 'Email Automation', desc: 'Built a 7-step welcome and nurture sequence that replaced manual outreach, adding 30% of monthly pipeline on autopilot.' },
                   ].map((item, i) => (
-                    <div key={i} className="flex gap-4 items-start border border-[var(--border)] bg-white rounded-lg p-5">
+                    <div key={i} className="flex gap-4 items-start border border-[var(--border)] bg-white rounded-lg p-5 cursor-default">
                       <div className="w-7 h-7 bg-[var(--orange)] rounded flex items-center justify-center text-white text-xs font-medium shrink-0">{i + 1}</div>
                       <div>
                         <h4 className="text-sm text-[var(--navy)] font-medium mb-0.5">{item.title}</h4>
@@ -146,20 +146,20 @@ export default function GridmasterCaseStudy() {
                     { val: '12%', label: 'New Landing Page CVR' },
                   ].map((r, i) => (
                     <div key={i} className="bg-white p-6 text-center">
-                      <div className="text-3xl md:text-4xl text-[var(--orange)] font-semibold font-[var(--font-playfair)] mb-1">{r.val}</div>
-                      <div className="text-xs text-[var(--text)] uppercase tracking-wider">{r.label}</div>
+                      <div className="text-3xl md:text-4xl text-[var(--orange)] font-semibold font-[var(--font-satoshi)] mb-1">{r.val}</div>
+                      <div className="text-xs md:text-[13px] text-[var(--text)] uppercase tracking-wider">{r.label}</div>
                     </div>
                   ))}
                 </div>
 
-                <div className="border border-[var(--border)] bg-[var(--navy)] text-white rounded-lg p-6">
-                  <div className="text-[var(--orange)] text-2xl mb-2 font-[var(--font-playfair)]">&ldquo;</div>
-                  <p className="text-sm text-white/80 leading-relaxed mb-4">
+                <div className="bg-[var(--navy)] rounded-lg p-6">
+                  <div className="text-[var(--orange)] text-2xl mb-2">&ldquo;</div>
+                  <p className="text-sm text-white/80 font-medium leading-relaxed mb-4">
                     OneBridge didn&apos;t just run ads for us. They rebuilt our entire digital presence from the ground up. The results speak for themselves.
                   </p>
                   <div>
-                    <div className="text-sm text-white font-medium">James K.</div>
-                    <div className="text-xs text-white/50">CEO, GridMaster</div>
+                    <div className="text-sm text-white font-semibold">James K.</div>
+                    <div className="text-xs text-white/60">CEO, GridMaster</div>
                   </div>
                 </div>
               </motion.div>
@@ -169,11 +169,11 @@ export default function GridmasterCaseStudy() {
         </div>
       </section>
 
-      <section className="border-t border-[var(--border)] bg-[var(--navy)]">
+      <section className="bg-[var(--navy)]">
         <div className="max-w-[1200px] mx-auto px-6 py-16 md:py-20 text-center w-full">
-          <h2 className="text-2xl md:text-3xl text-white mb-4 font-[var(--font-playfair)]">Want Results Like This?</h2>
-          <p className="text-white/60 text-sm mb-8">Start with a free digital audit. No commitment, just clarity.</p>
-          <Link href="/contact" className="border border-white/30 text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:bg-white/10 transition-colors inline-block">
+          <h2 className="text-2xl md:text-3xl text-white font-bold mb-4">Want Results Like This?</h2>
+          <p className="text-white/80 text-sm font-medium mb-8">Start with a free digital audit. No commitment, just clarity.</p>
+          <Link href="/contact" className="border border-white/30 text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:bg-white/10 transition-colors inline-block cursor-pointer">
             Get Your Free Audit
           </Link>
         </div>

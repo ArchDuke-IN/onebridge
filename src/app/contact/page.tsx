@@ -47,7 +47,7 @@ export default function ContactPage() {
 
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <div className="border border-[var(--border)] bg-white rounded-lg p-8 mb-10">
-                <h3 className="text-xl text-[var(--navy)] font-[var(--font-playfair)] mb-3">Claim Your Free Audit</h3>
+                <h3 className="text-xl text-[var(--navy)] font-[var(--font-satoshi)] mb-3">Claim Your Free Audit</h3>
                 <p className="text-sm text-[var(--text)] mb-6">
                   Not sure where to start? We offer a comprehensive digital audit for businesses — completely free. We analyze your current footprint and show you exactly where the gaps are.
                 </p>
@@ -70,7 +70,7 @@ export default function ContactPage() {
               {submitted ? (
                 <div className="border border-[var(--border)] bg-white rounded-lg p-12 text-center">
                   <div className="w-12 h-12 bg-[var(--navy)] rounded-lg flex items-center justify-center mx-auto mb-4 text-white text-xl">&#10003;</div>
-                  <h2 className="text-xl text-[var(--navy)] font-[var(--font-playfair)] mb-2">Thank You</h2>
+                  <h2 className="text-xl text-[var(--navy)] font-[var(--font-satoshi)] mb-2">Thank You</h2>
                   <p className="text-sm text-[var(--text)]">We&apos;ll be in touch within 24 hours.</p>
                 </div>
               ) : (
@@ -79,27 +79,27 @@ export default function ContactPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="name" className="text-xs font-medium text-[var(--navy)] block mb-1">Name <span className="text-red-400">*</span></label>
-                        <input type="text" id="name" required className="w-full p-2.5 border border-[var(--border)] rounded text-sm bg-[var(--background)] focus:outline-none focus:border-[var(--navy)] transition-colors" />
+                        <input type="text" id="name" name="name" required className="w-full p-2.5 border border-[var(--border)] rounded text-sm bg-white focus:outline-none focus:border-[var(--navy)] transition-colors" />
                       </div>
                       <div>
                         <label htmlFor="company" className="text-xs font-medium text-[var(--navy)] block mb-1">Company <span className="text-red-400">*</span></label>
-                        <input type="text" id="company" required className="w-full p-2.5 border border-[var(--border)] rounded text-sm bg-[var(--background)] focus:outline-none focus:border-[var(--navy)] transition-colors" />
+                        <input type="text" id="company" name="company" required className="w-full p-2.5 border border-[var(--border)] rounded text-sm bg-white focus:outline-none focus:border-[var(--navy)] transition-colors" />
                       </div>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="email" className="text-xs font-medium text-[var(--navy)] block mb-1">Email <span className="text-red-400">*</span></label>
-                        <input type="email" id="email" required className="w-full p-2.5 border border-[var(--border)] rounded text-sm bg-[var(--background)] focus:outline-none focus:border-[var(--navy)] transition-colors" />
+                        <input type="email" id="email" name="email" required className="w-full p-2.5 border border-[var(--border)] rounded text-sm bg-white focus:outline-none focus:border-[var(--navy)] transition-colors" />
                       </div>
                       <div>
                         <label htmlFor="number" className="text-xs font-medium text-[var(--navy)] block mb-1">Phone <span className="text-red-400">*</span></label>
-                        <input type="tel" id="number" required className="w-full p-2.5 border border-[var(--border)] rounded text-sm bg-[var(--background)] focus:outline-none focus:border-[var(--navy)] transition-colors" />
+                        <input type="tel" id="number" name="number" required className="w-full p-2.5 border border-[var(--border)] rounded text-sm bg-white focus:outline-none focus:border-[var(--navy)] transition-colors" />
                       </div>
                     </div>
                     <div>
-                      <textarea id="message" required rows={4} className="w-full p-3 border border-[var(--border)] rounded text-sm bg-[var(--background)] focus:outline-none focus:border-[var(--navy)] transition-colors resize-none" placeholder="Describe your project..."></textarea>
+                      <textarea id="message" name="message" required rows={4} className="w-full p-3 border border-[var(--border)] rounded text-sm bg-white focus:outline-none focus:border-[var(--navy)] transition-colors resize-none" placeholder="Describe your project..."></textarea>
                     </div>
-                    <button type="submit" disabled={sending} className="bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:opacity-90 transition-opacity w-full sm:w-auto disabled:opacity-50">
+                    <button type="submit" disabled={sending} className="bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:bg-[#233558] transition-colors w-full sm:w-auto disabled:opacity-50 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--navy)]">
                       {sending ? 'Sending...' : 'Send Message'}
                     </button>
                   </form>

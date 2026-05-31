@@ -51,7 +51,7 @@ export default function AboutPage() {
                 { label: 'Single Hub', body: 'No more juggling five freelancers. We manage the entire pipeline.' },
                 { label: 'Measured Growth', body: 'Every dollar spent is tracked, measured, and reported plainly.' },
               ].map((item, i) => (
-                <motion.div key={i} initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="p-5 rounded-lg border border-[var(--border)] bg-white">
+                <motion.div key={i} initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="p-5 rounded-lg border border-[var(--border)] bg-white cursor-default">
                   <div className="font-medium text-[var(--navy)] mb-1">{item.label}</div>
                   <p className="text-sm text-[var(--text)]">{item.body}</p>
                 </motion.div>
@@ -70,20 +70,20 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {values.map((v, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="p-6 rounded-lg border border-[var(--border)] bg-white">
-                <div className="text-lg text-[var(--orange)] font-semibold mb-1 font-[var(--font-playfair)]">{v.title}</div>
+              <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="p-6 rounded-lg border border-[var(--border)] bg-white cursor-default">
+                <div className="text-lg text-[var(--orange)] font-semibold mb-1 font-[var(--font-satoshi)]">{v.title}</div>
                 <p className="text-sm text-[var(--text)]">{v.desc}</p>
               </motion.div>
             ))}
           </div>
 
-          <motion.div {...fadeUp} className="mt-8 p-8 md:p-10 rounded-lg border border-[var(--border)] bg-[var(--navy)] text-white">
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <motion.div {...fadeUp} className="mt-10 p-8 md:p-10 rounded-lg bg-[var(--navy)]">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
               <div>
-                <h3 className="text-xl md:text-2xl text-white mb-2">The Goal</h3>
-                <p className="text-white/70 text-sm">Replace agency fluff with measurable revenue systems that run quietly and effectively.</p>
+                <h3 className="text-xl md:text-2xl text-white font-bold mb-1.5">The Goal</h3>
+                <p className="text-white/80 text-sm font-medium">Replace agency fluff with measurable revenue systems that run quietly and effectively.</p>
               </div>
-              <Link href="/contact" className="border border-white/30 text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:bg-white/10 transition-colors whitespace-nowrap">
+              <Link href="/contact" className="border border-white/30 text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:bg-white/10 transition-colors whitespace-nowrap cursor-pointer shrink-0">
                 Get Your Free Audit
               </Link>
             </div>

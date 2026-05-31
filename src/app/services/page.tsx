@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   alternates: { canonical: `${siteConfig.url}/services` },
 };
 
-const fadeUp = { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: "-60px" }, transition: { duration: 0.5 } };
+const fadeUp = { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: "-60px" }, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const } };
 
 const services = [
   { title: "Social Media Management", desc: "Strategy, content, posting & engagement across all platforms." },
@@ -37,7 +37,7 @@ export default function ServicesPage() {
           <p className="text-lg md:text-xl text-[var(--text)] leading-relaxed max-w-2xl mb-8">
             All services customised to your business goals and delivered end-to-end. One team, one strategy.
           </p>
-          <Link href="/contact" className="bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:opacity-90 transition-opacity inline-block">
+          <Link href="/contact" className="bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:bg-[#233558] transition-colors inline-block cursor-pointer">
             Start a Project
           </Link>
         </motion.div>
@@ -51,8 +51,8 @@ export default function ServicesPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {services.map((s, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }} className="p-6 rounded-lg border border-[var(--border)] bg-white">
-                <div className="text-lg text-[var(--orange)] font-semibold mb-1.5 font-[var(--font-playfair)]">{s.title}</div>
+              <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }} className="p-6 rounded-lg border border-[var(--border)] bg-white cursor-default">
+                <div className="text-lg text-[var(--orange)] font-semibold mb-1.5 font-[var(--font-satoshi)]">{s.title}</div>
                 <p className="text-sm text-[var(--text)]">{s.desc}</p>
               </motion.div>
             ))}
@@ -73,7 +73,7 @@ export default function ServicesPage() {
             <div className="space-y-6">
               {process.map((item, idx) => (
                 <motion.div key={idx} initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.08 }} className="flex gap-4">
-                  <div className="text-lg text-[var(--orange)] font-semibold font-[var(--font-playfair)] shrink-0 w-10">{item.step}</div>
+                  <div className="text-lg text-[var(--orange)] font-semibold font-[var(--font-satoshi)] shrink-0 w-10">{item.step}</div>
                   <div>
                     <div className="font-medium text-[var(--navy)] mb-0.5">{item.title}</div>
                     <p className="text-sm text-[var(--text)]">{item.desc}</p>
