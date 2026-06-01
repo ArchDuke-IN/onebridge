@@ -54,30 +54,25 @@ export default async function WorkPage() {
         </motion.div>
       </section>
 
-      {/* Portfolio Grid */}
-      <section className="border-t border-[var(--border)]">
-        <div className="max-w-[1400px] mx-auto px-6 py-16 md:py-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-            {caseStudies.map((cs, i) => (
-              <motion.div
-                key={cs.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-              >
-                {cs.slug ? (
-                  <Link href={`/case-studies/${cs.slug}`} className="block group cursor-pointer">
-                    <ProjectCard item={cs} />
-                  </Link>
-                ) : (
-                  <ProjectCard item={cs} />
-                )}
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Portfolio Sections - full width */}
+      {caseStudies.map((cs, i) => (
+        <motion.div
+          key={cs.id}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="border-t border-[var(--border)]"
+        >
+          {cs.slug ? (
+            <Link href={`/case-studies/${cs.slug}`} className="block group">
+              <ProjectSection item={cs} />
+            </Link>
+          ) : (
+            <ProjectSection item={cs} />
+          )}
+        </motion.div>
+      ))}
 
       {/* Testimonials */}
       <section id="testimonials" className="border-t border-[var(--border)]">
@@ -128,30 +123,29 @@ export default async function WorkPage() {
   );
 }
 
-function ProjectCard({ item }: { item: { image: string; imageEmoji: string; label: string; title: string; result: string; slug: string | null } }) {
+function ProjectSection({ item }: { item: { image: string; imageEmoji: string; label: string; title: string; slug: string | null } }) {
   return (
-    <div className="relative overflow-hidden rounded-lg bg-white border border-[var(--border)] group-hover:border-[var(--navy)] transition-colors">
+    <div className="w-full">
       <div className="aspect-[1.84/1] relative overflow-hidden bg-[var(--navy)]/5">
         {item.image ? (
           <img
             src={item.image}
             alt={item.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-4xl">
-            {item.imageEmoji || '🖼️'}
+          <div className="w-full h-full flex flex-col items-center justify-center gap-3 text-[var(--navy)]">
+            <span className="text-5xl md:text-6xl">{item.imageEmoji || '🖼️'}</span>
+            <span className="text-xs uppercase tracking-widest text-[var(--text)]">{item.label}</span>
+            <span className="text-sm font-medium">{item.title}</span>
           </div>
         )}
-        <div className="absolute inset-0 bg-[var(--navy)]/0 group-hover:bg-[var(--navy)]/40 transition-colors duration-300 flex items-center justify-center">
-          <span className="text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-            View Project
-          </span>
-        </div>
-      </div>
-      <div className="p-4">
-        <span className="text-[11px] text-[var(--text)] uppercase tracking-widest">{item.label}</span>
-        <h3 className="text-sm font-medium text-[var(--navy)] mt-0.5">{item.title}</h3>
+        {item.image && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-[var(--navy)]/0 group-hover:bg-[var(--navy)]/50 transition-colors duration-500">
+            <span className="text-white text-xs uppercase tracking-widest mb-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">{item.label}</span>
+            <span className="text-white text-lg md:text-xl font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">{item.title}</span>
+          </div>
+        )}
       </div>
     </div>
   );
