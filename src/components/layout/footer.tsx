@@ -3,12 +3,12 @@ import { siteConfig } from '@/config/site';
 
 export function Footer() {
   return (
-    <footer className="border-t border-[var(--border)] bg-soft mt-24">
+    <footer className="border-t-2 border-[var(--border)] bg-[var(--background)] mt-24">
       <div className="max-w-[1200px] mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2.5 mb-4">
-              <img src="/logo.jpeg" alt="OneBridge Marketing" className="h-7 w-7 rounded-full object-cover" />
+              <img src="/logo.jpeg" alt="OneBridge Marketing" className="h-7 w-7 rounded-full object-cover border-2 border-[var(--navy)]" />
               <span className="font-[var(--font-satoshi)] text-lg text-[var(--navy)] font-bold">OneBridge</span>
             </Link>
             <p className="text-sm text-[var(--text)] leading-relaxed max-w-xs">

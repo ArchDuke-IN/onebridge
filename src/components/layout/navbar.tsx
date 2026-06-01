@@ -60,13 +60,13 @@ export function Navbar() {
 
   return (
     <nav className={cn(
-      "sticky top-0 z-50 w-full transition-all duration-300 bg-white border-b border-[var(--border)]",
-      scrolled && "shadow-sm"
+      "sticky top-0 z-50 w-full transition-all duration-300 bg-white border-b-2 border-[var(--border)]",
+      scrolled && "shadow-[var(--brutal-shadow-sm)]"
     )}>
       <div className="max-w-[1200px] mx-auto px-6 flex items-center justify-between h-14 md:h-16">
 
         <Link href="/" className="flex items-center gap-2.5 shrink-0" aria-label="OneBridge Marketing">
-          <img src="/logo.jpeg" alt="OneBridge Marketing" className="h-8 w-8 rounded-full object-cover" />
+          <img src="/logo.jpeg" alt="OneBridge Marketing" className="h-8 w-8 rounded-full object-cover border-2 border-[var(--navy)]" />
           <span className="font-[var(--font-satoshi)] text-lg text-[var(--navy)] font-bold tracking-tight">OneBridge</span>
         </Link>
 
@@ -102,7 +102,7 @@ export function Navbar() {
                 initial={{ opacity: 0, y: 6, scale: 0.97 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute top-full right-0 mt-1 w-56 bg-white rounded-xl border border-[var(--border)] shadow-lg overflow-hidden z-50"
+                className="absolute top-full right-0 mt-1 w-56 bg-white border-2 border-[var(--navy)] shadow-[var(--brutal-shadow)] overflow-hidden z-50"
               >
                 <div className="p-1.5">
                   {workLinks.map((item) => (
@@ -123,7 +123,7 @@ export function Navbar() {
 
           <Link
             href="/contact"
-            className="ml-4 bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:bg-[#233558] transition-colors"
+            className="ml-4 bg-[var(--navy)] text-white text-sm font-bold py-2.5 px-5 shadow-[var(--brutal-shadow-sm)] hover:shadow-[var(--brutal-shadow)] hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0 active:translate-y-0 transition-all"
           >
             Contact
           </Link>
@@ -174,7 +174,7 @@ export function Navbar() {
             <Link
               href="/contact"
               onClick={() => setIsOpen(false)}
-              className="block bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg text-center hover:bg-[#233558] transition-colors"
+              className="block bg-[var(--navy)] text-white text-sm font-bold py-2.5 px-5 text-center hover:bg-[#233558] transition-colors border-2 border-[var(--navy)]"
             >
               Contact Us
             </Link>
