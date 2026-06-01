@@ -185,7 +185,7 @@ export function PortfolioEditor({ items: initial }: { items: InferSelectModel<ty
                     <input
                       value={item.image}
                       onChange={e => update(item.id, 'image', e.target.value)}
-                      placeholder="Paste image URL or pick from library"
+                      placeholder="Paste image URL"
                       className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
                     />
                     <button
@@ -195,6 +195,23 @@ export function PortfolioEditor({ items: initial }: { items: InferSelectModel<ty
                       Browse
                     </button>
                   </div>
+                  <label className="flex items-center gap-2 mt-2 cursor-pointer text-xs text-blue-600 hover:text-blue-700">
+                    <input type="file" accept="image/*" className="hidden"
+                      onChange={async e => {
+                        const file = e.target.files?.[0];
+                        if (!file) return;
+                        const reader = new FileReader();
+                        reader.onload = () => {
+                          if (typeof reader.result === 'string') {
+                            update(item.id, 'image', reader.result);
+                          }
+                        };
+                        reader.readAsDataURL(file);
+                      }}
+                    />
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5-5m0 0l5 5m-5-5v12" /></svg>
+                    Upload from computer
+                  </label>
                   {item.image && (
                     <div className="mt-2 aspect-video rounded-lg overflow-hidden bg-gray-100 border">
                       <img src={item.image} alt="" className="w-full h-full object-cover"
