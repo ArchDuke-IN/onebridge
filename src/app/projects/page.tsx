@@ -15,29 +15,39 @@ export const metadata: Metadata = {
   alternates: { canonical: `${siteConfig.url}/projects` },
 };
 
-const placeholderItems = [
-  { id: 0, slug: null, image: '', imageEmoji: '🎯', label: 'Branding', title: 'Project One', result: 'Coming Soon' },
-  { id: 1, slug: null, image: '', imageEmoji: '📱', label: 'Social Media', title: 'Project Two', result: 'Coming Soon' },
-  { id: 2, slug: null, image: '', imageEmoji: '🌐', label: 'Web Dev', title: 'Project Three', result: 'Coming Soon' },
-  { id: 3, slug: null, image: '', imageEmoji: '📊', label: 'Marketing', title: 'Project Four', result: 'Coming Soon' },
-  { id: 4, slug: null, image: '', imageEmoji: '🎬', label: 'Content', title: 'Project Five', result: 'Coming Soon' },
+const defaults = [
+  { slug: 'project-one', label: 'Branding', title: 'Project One', subtitle: 'Brand identity', description: '', result: 'Coming Soon', image: '', imageEmoji: '🎯', tags: '[]' },
+  { slug: 'project-two', label: 'Social Media', title: 'Project Two', subtitle: 'Social strategy', description: '', result: 'Coming Soon', image: '', imageEmoji: '📱', tags: '[]' },
+  { slug: 'project-three', label: 'Web Dev', title: 'Project Three', subtitle: 'Web development', description: '', result: 'Coming Soon', image: '', imageEmoji: '🌐', tags: '[]' },
+  { slug: 'project-four', label: 'Marketing', title: 'Project Four', subtitle: 'Marketing campaign', description: '', result: 'Coming Soon', image: '', imageEmoji: '📊', tags: '[]' },
+  { slug: 'project-five', label: 'Content', title: 'Project Five', subtitle: 'Content strategy', description: '', result: 'Coming Soon', image: '', imageEmoji: '🎬', tags: '[]' },
 ];
 
-const placeholderTestimonials = [
-  { id: 0, quote: 'Your testimonial here — edit in admin.', name: 'Client Name', role: 'Business Owner' },
-  { id: 1, quote: 'Real feedback from real clients goes here.', name: 'Client Name', role: 'CEO' },
-  { id: 2, quote: 'Share your success story with the world.', name: 'Client Name', role: 'Founder' },
+const defaultTestimonials = [
+  { quote: 'Your testimonial here — edit in admin.', name: 'Client Name', role: 'Business Owner' },
+  { quote: 'Real feedback from real clients goes here.', name: 'Client Name', role: 'CEO' },
+  { quote: 'Share your success story with the world.', name: 'Client Name', role: 'Founder' },
 ];
 
 export default async function WorkPage() {
   const c = await getPageContent('projects');
-  const [dbItems, dbTestimonials] = await Promise.all([
-    db.select().from(portfolioItems).where(eq(portfolioItems.published, true)).orderBy(asc(portfolioItems.order)),
-    db.select().from(testimonialsTable).where(eq(testimonialsTable.published, true)).orderBy(asc(testimonialsTable.order)),
-  ]);
+  let dbItems = await db.select().from(portfolioItems).where(eq(portfolioItems.published, true)).orderBy(asc(portfolioItems.order));
+  let dbTestimonials = await db.select().from(testimonialsTable).where(eq(testimonialsTable.published, true)).orderBy(asc(testimonialsTable.order));
 
-  const caseStudies = dbItems.length ? dbItems : placeholderItems;
-  const testimonials = dbTestimonials.length ? dbTestimonials : placeholderTestimonials;
+  if (!dbItems.length) {
+    const now = new Date().toISOString();
+    await db.insert(portfolioItems).values(defaults.map((d, i) => ({ ...d, order: i, published: true, createdAt: now, updatedAt: now })));
+    dbItems = await db.select().from(portfolioItems).where(eq(portfolioItems.published, true)).orderBy(asc(portfolioItems.order));
+  }
+
+  if (!dbTestimonials.length) {
+    const now = new Date().toISOString();
+    await db.insert(testimonialsTable).values(defaultTestimonials.map((d, i) => ({ ...d, avatar: '', order: i, published: true, createdAt: now, updatedAt: now })));
+    dbTestimonials = await db.select().from(testimonialsTable).where(eq(testimonialsTable.published, true)).orderBy(asc(testimonialsTable.order));
+  }
+
+  const caseStudies = dbItems;
+  const testimonials = dbTestimonials;
 
   return (
     <div className="flex flex-col w-full bg-[var(--background)]">
