@@ -22,9 +22,8 @@ export default async function AdminContentPage() {
         </div>
       ) : (
         <div className="space-y-6">
-          {['home', 'about', 'services'].map((page) => {
+          {[...new Set(content.map((c) => c.page))].map((page) => {
             const blocks = content.filter((c) => c.page === page);
-            if (blocks.length === 0) return null;
             return (
               <div key={page} className="bg-white rounded-xl border border-gray-200 overflow-hidden">
                 <div className="px-6 py-4 border-b border-gray-100 bg-gray-50">

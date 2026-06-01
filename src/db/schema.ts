@@ -45,3 +45,58 @@ export const siteImages = pgTable('site_images', {
   alt: text('alt').notNull().default(''),
   updatedAt: text('updated_at').notNull().default('2025-01-01T00:00:00.000Z'),
 });
+
+// Portfolio & Case Studies
+export const portfolioItems = pgTable('portfolio_items', {
+  id: serial('id').primaryKey(),
+  slug: text('slug').notNull().unique(),
+  label: text('label').notNull(),
+  title: text('title').notNull(),
+  subtitle: text('subtitle').notNull(),
+  description: text('description').notNull().default(''),
+  result: text('result').notNull(),
+  image: text('image').notNull().default(''),
+  imageEmoji: text('image_emoji').notNull().default(''),
+  tags: text('tags').notNull().default(''), // JSON stringified array
+  order: integer('order').notNull().default(0),
+  published: boolean('published').notNull().default(true),
+  createdAt: text('created_at').notNull().default('2025-01-01T00:00:00.000Z'),
+  updatedAt: text('updated_at').notNull().default('2025-01-01T00:00:00.000Z'),
+});
+
+// Inquiries (contact form submissions)
+export const inquiries = pgTable('inquiries', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(),
+  company: text('company'),
+  email: text('email').notNull(),
+  phone: text('phone'),
+  message: text('message').notNull(),
+  createdAt: text('created_at').notNull().default('2025-01-01T00:00:00.000Z'),
+});
+
+// Services
+export const services = pgTable('services', {
+  id: serial('id').primaryKey(),
+  title: text('title').notNull(),
+  description: text('description').notNull().default(''),
+  emoji: text('emoji').notNull().default(''),
+  color: text('color').notNull().default(''),
+  order: integer('order').notNull().default(0),
+  published: boolean('published').notNull().default(true),
+  createdAt: text('created_at').notNull().default('2025-01-01T00:00:00.000Z'),
+  updatedAt: text('updated_at').notNull().default('2025-01-01T00:00:00.000Z'),
+});
+
+// Testimonials
+export const testimonials = pgTable('testimonials', {
+  id: serial('id').primaryKey(),
+  quote: text('quote').notNull(),
+  name: text('name').notNull(),
+  role: text('role').notNull(),
+  avatar: text('avatar').notNull().default(''),
+  order: integer('order').notNull().default(0),
+  published: boolean('published').notNull().default(true),
+  createdAt: text('created_at').notNull().default('2025-01-01T00:00:00.000Z'),
+  updatedAt: text('updated_at').notNull().default('2025-01-01T00:00:00.000Z'),
+});

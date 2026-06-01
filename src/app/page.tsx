@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import * as motion from "framer-motion/client";
+import { getPageContent } from "@/lib/content";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -9,12 +10,41 @@ const fadeUp = {
   transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
 };
 
-const statItems = [
-  { val: "100+", label: "Projects Delivered" },
-  { val: "99%", label: "Client Satisfaction" },
-];
+export default async function Home() {
+  const c = await getPageContent('home');
 
-export default function Home() {
+  const statItems = [
+    { val: c['hero.stat_1_val'] ?? "100+", label: c['hero.stat_1_label'] ?? "Projects Delivered" },
+    { val: c['hero.stat_2_val'] ?? "99%", label: c['hero.stat_2_label'] ?? "Client Satisfaction" },
+  ];
+
+  const problemCards = [
+    { title: c['problem.card_1_title'] ?? "No Time", desc: c['problem.card_1_desc'] ?? "10-14 hour days leave zero room for marketing." },
+    { title: c['problem.card_2_title'] ?? "No Strategy", desc: c['problem.card_2_desc'] ?? "Posting without a plan is just noise." },
+    { title: c['problem.card_3_title'] ?? "No Team", desc: c['problem.card_3_desc'] ?? "Hiring specialists is expensive and complex." },
+    { title: c['problem.card_4_title'] ?? "No Results", desc: c['problem.card_4_desc'] ?? "Money spent without accountability is wasted." },
+  ];
+
+  const impactStats = [
+    { val: c['impact.stat_1_val'] ?? "300%", label: c['impact.stat_1_label'] ?? "Avg reach increase" },
+    { val: c['impact.stat_2_val'] ?? "5x", label: c['impact.stat_2_label'] ?? "Lead flow growth" },
+    { val: c['impact.stat_3_val'] ?? "12+", label: c['impact.stat_3_label'] ?? "Hours saved per week" },
+    { val: c['impact.stat_4_val'] ?? "100%", label: c['impact.stat_4_label'] ?? "Done-for-you" },
+  ];
+
+  const serviceCards = [
+    { name: c['services.card_1_name'] ?? "Social Media Management", outline: c['services.card_1_desc'] ?? "Strategy, content, posting & engagement." },
+    { name: c['services.card_2_name'] ?? "Content Creation", outline: c['services.card_2_desc'] ?? "Reels, videos, graphics & branded posts." },
+    { name: c['services.card_3_name'] ?? "Branding & Identity", outline: c['services.card_3_desc'] ?? "Logos, positioning & visual identity." },
+    { name: c['services.card_4_name'] ?? "Website Development", outline: c['services.card_4_desc'] ?? "Fast, conversion-focused websites." },
+  ];
+
+  const auditChecks = [
+    { label: c['final_cta.check_1'] ?? "SEO & Website Performance", desc: c['final_cta.check_1_desc'] ?? "Find out why visitors leave and how to keep them." },
+    { label: c['final_cta.check_2'] ?? "Social Media Presence", desc: c['final_cta.check_2_desc'] ?? "See where your brand stands vs. competitors." },
+    { label: c['final_cta.check_3'] ?? "Competitor Benchmarking", desc: c['final_cta.check_3_desc'] ?? "Know exactly what they're doing that you're not." },
+  ];
+
   return (
     <div className="flex flex-col w-full">
 
@@ -28,11 +58,11 @@ export default function Home() {
           </div>
 
           <p className="text-[var(--text)] text-[15px] leading-relaxed">
-            We build functional, high-earning marketing systems. You run your business.
+            {c['hero.tagline'] ?? "We build functional, high-earning marketing systems. You run your business."}
           </p>
 
           <Link href="/contact" className="bg-[var(--navy)] text-white text-sm font-medium py-3 px-6 rounded-lg hover:bg-[#233558] transition-colors cursor-pointer w-fit">
-            Get Started
+            {c['hero.cta'] ?? "Get Started"}
           </Link>
 
           <div className="w-full max-w-[220px] aspect-square relative mx-auto my-2">
@@ -88,13 +118,13 @@ export default function Home() {
               className="max-w-[320px] text-center lg:text-left lg:absolute lg:top-1/2 lg:left-12 lg:-translate-y-1/2"
             >
               <p className="text-[var(--text)] text-lg leading-relaxed mb-6">
-                We build functional, high-earning marketing systems. You run your business.
+                {c['hero.tagline'] ?? "We build functional, high-earning marketing systems. You run your business."}
               </p>
               <Link
                 href="/contact"
                 className="bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:bg-[#233558] transition-colors inline-block cursor-pointer"
               >
-                Get Started
+                {c['hero.cta'] ?? "Get Started"}
               </Link>
             </motion.div>
 
@@ -121,7 +151,7 @@ export default function Home() {
               className="hidden lg:block lg:absolute lg:top-1/3 lg:right-12 lg:max-w-[220px]"
             >
               <p className="text-sm text-[var(--text)] leading-relaxed">
-                One team handling your entire digital presence. Strategy, execution, results — delivered end-to-end.
+                {c['hero.mission'] ?? "One team handling your entire digital presence. Strategy, execution, results — delivered end-to-end."}
               </p>
             </motion.div>
 
@@ -150,19 +180,14 @@ export default function Home() {
         <section className="border-t border-[var(--border)]">
           <div className="max-w-[1200px] mx-auto px-6 py-16 md:py-20 w-full">
             <motion.div {...fadeUp} className="max-w-2xl mb-16">
-              <h2 className="text-2xl md:text-3xl text-[var(--navy)] mb-4">The Problem</h2>
+              <h2 className="text-2xl md:text-3xl text-[var(--navy)] mb-4">{c['problem.title'] ?? "The Problem"}</h2>
               <p className="text-[var(--text)] leading-relaxed">
-                Small businesses don&apos;t ignore their online presence by choice. They&apos;re too busy running the business to do it right — and hiring a full team is expensive.
+                {c['problem.description'] ?? "Small businesses don't ignore their online presence by choice. They're too busy running the business to do it right — and hiring a full team is expensive."}
               </p>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-              {[
-                { title: "No Time", desc: "10-14 hour days leave zero room for marketing." },
-                { title: "No Strategy", desc: "Posting without a plan is just noise." },
-                { title: "No Team", desc: "Hiring specialists is expensive and complex." },
-                { title: "No Results", desc: "Money spent without accountability is wasted." },
-              ].map((item, i) => (
+              {problemCards.map((item, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="p-6 rounded-lg border border-[var(--border)] bg-white cursor-default">
                   <div className="text-xl text-[var(--orange)] font-semibold mb-2 font-[var(--font-satoshi)]">{item.title}</div>
                   <p className="text-sm text-[var(--text)] leading-relaxed">{item.desc}</p>
@@ -176,11 +201,11 @@ export default function Home() {
           <div className="max-w-[1200px] mx-auto px-6 py-14 md:py-16 w-full">
             <motion.div {...fadeUp} className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
               <div>
-                <h2 className="text-xl md:text-2xl text-white font-bold mb-1.5">One Bridge solves every single one of these.</h2>
-                <p className="text-white/80 text-sm font-medium">That&apos;s what we were built for.</p>
+                <h2 className="text-xl md:text-2xl text-white font-bold mb-1.5">{c['transition.title'] ?? "One Bridge solves every single one of these."}</h2>
+                <p className="text-white/80 text-sm font-medium">{c['transition.subtitle'] ?? "That's what we were built for."}</p>
               </div>
               <Link href="/about" className="border border-white/30 text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:bg-white/10 transition-colors whitespace-nowrap shrink-0">
-                How We Do It
+                {c['transition.cta'] ?? "How We Do It"}
               </Link>
             </motion.div>
           </div>
@@ -189,17 +214,12 @@ export default function Home() {
         <section className="border-t border-[var(--border)]">
           <div className="max-w-[1200px] mx-auto px-6 py-16 md:py-20 w-full">
             <motion.div {...fadeUp} className="mb-12">
-              <h2 className="text-2xl md:text-3xl text-[var(--navy)] mb-2">Growth Impact</h2>
-              <p className="text-[var(--text)]">Real metrics from real campaigns.</p>
+              <h2 className="text-2xl md:text-3xl text-[var(--navy)] mb-2">{c['impact.title'] ?? "Growth Impact"}</h2>
+              <p className="text-[var(--text)]">{c['impact.subtitle'] ?? "Real metrics from real campaigns."}</p>
             </motion.div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-              {[
-                { val: "300%", label: "Avg reach increase" },
-                { val: "5x", label: "Lead flow growth" },
-                { val: "12+", label: "Hours saved per week" },
-                { val: "100%", label: "Done-for-you" },
-              ].map((s, i) => (
+              {impactStats.map((s, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="text-center cursor-default">
                   <div className="text-3xl md:text-4xl text-[var(--orange)] font-semibold mb-1 font-[var(--font-satoshi)]">{s.val}</div>
                   <div className="text-xs md:text-[13px] text-[var(--text)] uppercase tracking-wider">{s.label}</div>
@@ -213,22 +233,17 @@ export default function Home() {
           <div className="max-w-[1200px] mx-auto px-6 py-16 md:py-20 w-full">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
               <motion.div {...fadeUp}>
-                <h2 className="text-2xl md:text-3xl text-[var(--navy)] mb-4">Everything You Need. Under One Roof.</h2>
+                <h2 className="text-2xl md:text-3xl text-[var(--navy)] mb-4">{c['services.title'] ?? "Everything You Need. Under One Roof."}</h2>
                 <p className="text-[var(--text)] leading-relaxed mb-6">
-                  All services customised to your goals and delivered end-to-end by one dedicated team.
+                  {c['services.description'] ?? "All services customised to your goals and delivered end-to-end by one dedicated team."}
                 </p>
                 <Link href="/services" className="bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:bg-[#233558] transition-colors inline-block">
-                  View All Services
+                  {c['services.cta'] ?? "View All Services"}
                 </Link>
               </motion.div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {[
-                  { name: "Social Media Management", outline: "Strategy, content, posting & engagement." },
-                  { name: "Content Creation", outline: "Reels, videos, graphics & branded posts." },
-                  { name: "Branding & Identity", outline: "Logos, positioning & visual identity." },
-                  { name: "Website Development", outline: "Fast, conversion-focused websites." },
-                ].map((srv, i) => (
+                {serviceCards.map((srv, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="p-5 rounded-lg border border-[var(--border)] bg-white hover:border-[var(--navy)] transition-colors cursor-pointer">
                   <div className="font-medium text-[var(--navy)] mb-1.5">{srv.name}</div>
                   <p className="text-sm text-[var(--text)]">{srv.outline}</p>
@@ -243,21 +258,17 @@ export default function Home() {
           <div className="max-w-[1200px] mx-auto px-6 py-16 md:py-20 w-full">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <motion.div {...fadeUp}>
-                <h2 className="text-2xl md:text-3xl text-[var(--navy)] mb-4">Ready to Build Your Bridge?</h2>
+                <h2 className="text-2xl md:text-3xl text-[var(--navy)] mb-4">{c['final_cta.title'] ?? "Ready to Build Your Bridge?"}</h2>
                 <p className="text-[var(--text)] leading-relaxed mb-6">
-                  Start with a free digital audit. We&apos;ll analyze your current footprint and show you exactly where the gaps are — no commitment, just clarity.
+                  {c['final_cta.description'] ?? "Start with a free digital audit. We'll analyze your current footprint and show you exactly where the gaps are — no commitment, just clarity."}
                 </p>
                 <Link href="/contact" className="bg-[var(--navy)] text-white text-sm font-medium py-2.5 px-5 rounded-lg hover:bg-[#233558] transition-colors inline-block">
-                  Get Your Free Audit
+                  {c['final_cta.cta'] ?? "Get Your Free Audit"}
                 </Link>
               </motion.div>
 
               <motion.div {...fadeUp} className="space-y-4">
-                {[
-                  { label: "SEO &amp; Website Performance", desc: "Find out why visitors leave and how to keep them." },
-                  { label: "Social Media Presence", desc: "See where your brand stands vs. competitors." },
-                  { label: "Competitor Benchmarking", desc: "Know exactly what they're doing that you're not." },
-                ].map((item, i) => (
+                {auditChecks.map((item, i) => (
                   <div key={i} className="flex gap-4 items-start p-4 rounded-lg border border-[var(--border)] bg-[var(--background)]">
                     <div className="w-5 h-5 bg-[var(--orange)] rounded flex items-center justify-center text-white text-xs shrink-0 mt-0.5">&#10003;</div>
                     <div>

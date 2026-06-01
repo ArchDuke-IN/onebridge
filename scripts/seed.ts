@@ -52,6 +52,47 @@ async function seed() {
     updated_at TEXT NOT NULL DEFAULT '2025-01-01T00:00:00.000Z'
   )`;
 
+  await sql`CREATE TABLE IF NOT EXISTS portfolio_items (
+    id SERIAL PRIMARY KEY,
+    slug TEXT NOT NULL UNIQUE,
+    label TEXT NOT NULL,
+    title TEXT NOT NULL,
+    subtitle TEXT NOT NULL,
+    description TEXT NOT NULL DEFAULT '',
+    result TEXT NOT NULL,
+    image TEXT NOT NULL DEFAULT '',
+    image_emoji TEXT NOT NULL DEFAULT '',
+    tags TEXT NOT NULL DEFAULT '',
+    order INTEGER NOT NULL DEFAULT 0,
+    published BOOLEAN NOT NULL DEFAULT true,
+    created_at TEXT NOT NULL DEFAULT '2025-01-01T00:00:00.000Z',
+    updated_at TEXT NOT NULL DEFAULT '2025-01-01T00:00:00.000Z'
+  )`;
+
+  await sql`CREATE TABLE IF NOT EXISTS services (
+    id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL DEFAULT '',
+    emoji TEXT NOT NULL DEFAULT '',
+    color TEXT NOT NULL DEFAULT '',
+    order INTEGER NOT NULL DEFAULT 0,
+    published BOOLEAN NOT NULL DEFAULT true,
+    created_at TEXT NOT NULL DEFAULT '2025-01-01T00:00:00.000Z',
+    updated_at TEXT NOT NULL DEFAULT '2025-01-01T00:00:00.000Z'
+  )`;
+
+  await sql`CREATE TABLE IF NOT EXISTS testimonials (
+    id SERIAL PRIMARY KEY,
+    quote TEXT NOT NULL,
+    name TEXT NOT NULL,
+    role TEXT NOT NULL,
+    avatar TEXT NOT NULL DEFAULT '',
+    order INTEGER NOT NULL DEFAULT 0,
+    published BOOLEAN NOT NULL DEFAULT true,
+    created_at TEXT NOT NULL DEFAULT '2025-01-01T00:00:00.000Z',
+    updated_at TEXT NOT NULL DEFAULT '2025-01-01T00:00:00.000Z'
+  )`;
+
   const existing = await sql`SELECT id FROM users WHERE email = ${'admin@onebridge.com'}`;
   if (existing.length === 0) {
     const password = await hash('admin123', 10);
@@ -98,6 +139,87 @@ async function seed() {
       await sql`INSERT INTO site_images (key, url, alt) VALUES (${img.key}, ${img.url}, ${img.alt})`;
     }
     console.log(`Seeded ${defaultImages.length} site images.`);
+  }
+
+  const portfolioCount = await sql`SELECT COUNT(*) as c FROM portfolio_items`;
+  if (Number(portfolioCount[0]?.c) === 0) {
+    const defaults = [
+      {
+        slug: 'gridmaster',
+        label: 'B2B SaaS',
+        title: 'GridMaster',
+        subtitle: 'B2B SaaS Growth Strategy',
+        description: 'Scaled organic traffic by 350% in 6 months and rebuilt the entire conversion funnel with strategic content mapping.',
+        result: '+480% Lead Flow',
+        image: 'https://picsum.photos/seed/gridmaster/900/700',
+        image_emoji: '🚀',
+        tags: JSON.stringify(['SEO', 'Paid Ads', 'Funnel Optimization']),
+        order: 1,
+      },
+      {
+        slug: 'ecommerce-elite',
+        label: 'DTC Brand',
+        title: 'E-Commerce Elite',
+        subtitle: 'DTC Brand Scale',
+        description: 'Achieved a 4.2x return on ad spend through aggressive paid social campaigns and email automation sequences.',
+        result: '4.2x ROAS',
+        image: 'https://picsum.photos/seed/ecommerce-elite/900/700',
+        image_emoji: '💎',
+        tags: JSON.stringify(['Meta Ads', 'Email Marketing', 'Branding']),
+        order: 2,
+      },
+      {
+        slug: 'servicepro',
+        label: 'Local Services',
+        title: 'ServicePro',
+        subtitle: 'Local Business Growth',
+        description: 'Tripled inbound leads in 4 months through data-driven social media strategy and hyper-local SEO optimization.',
+        result: '3x Lead Volume',
+        image: 'https://picsum.photos/seed/servicepro/900/700',
+        image_emoji: '📈',
+        tags: JSON.stringify(['Social Strategy', 'Content Creation', 'Local SEO']),
+        order: 3,
+      },
+    ];
+
+    for (const item of defaults) {
+      await sql`INSERT INTO portfolio_items (slug, label, title, subtitle, description, result, image, image_emoji, tags, order)
+        VALUES (${item.slug}, ${item.label}, ${item.title}, ${item.subtitle}, ${item.description}, ${item.result}, ${item.image}, ${item.image_emoji}, ${item.tags}, ${item.order})`;
+    }
+    console.log(`Seeded ${defaults.length} portfolio items.`);
+  }
+
+  const servicesCount = await sql`SELECT COUNT(*) as c FROM services`;
+  if (Number(servicesCount[0]?.c) === 0) {
+    const defaults = [
+      { title: 'Social Media Management', description: 'Strategy, content calendar, posting & community engagement across Instagram, LinkedIn, TikTok & Twitter.', emoji: '📱', color: 'bg-[#08D9D6]', order: 1 },
+      { title: 'Content Creation', description: 'Reels, video production, carousels, graphics, copywriting & branded posts that actually convert.', emoji: '🎬', color: 'bg-[#FF66C4]', order: 2 },
+      { title: 'Branding & Identity', description: 'Logo design, brand guidelines, visual identity systems, color palettes & complete brand positioning.', emoji: '🎨', color: 'bg-[#FFE135]', order: 3 },
+      { title: 'Website Development', description: 'Fast, mobile-optimized, conversion-focused websites built with modern tech. SEO-ready from day one.', emoji: '💻', color: 'bg-white', order: 4 },
+      { title: 'Digital Marketing', description: 'Paid Ads (Meta & Google), SEO strategy, email marketing, retargeting & complete marketing automation.', emoji: '📊', color: 'bg-[#A05CFF]', order: 5 },
+      { title: 'Influencer & PR', description: 'Creator partnerships, press releases, media outreach, brand collaborations & reputation management.', emoji: '⭐', color: 'bg-[#52FFC2]', order: 6 },
+    ];
+
+    for (const item of defaults) {
+      await sql`INSERT INTO services (title, description, emoji, color, order)
+        VALUES (${item.title}, ${item.description}, ${item.emoji}, ${item.color}, ${item.order})`;
+    }
+    console.log(`Seeded ${defaults.length} services.`);
+  }
+
+  const testimonialsCount = await sql`SELECT COUNT(*) as c FROM testimonials`;
+  if (Number(testimonialsCount[0]?.c) === 0) {
+    const defaults = [
+      { quote: 'Working with OneBridge completely changed how we view marketing. They actually cared about ROI, not just pretty pictures.', name: 'Sarah J.', role: 'Founder, TechFlow', avatar: '👩‍💼', order: 1 },
+      { quote: 'The reporting is so transparent. Our lead volume has tripled in 4 months. We finally have a marketing partner we trust.', name: 'Michael T.', role: 'CEO, ServicePro', avatar: '👨‍💼', order: 2 },
+      { quote: 'Finally, an agency that doesn\'t just promise the world and disappear. They deliver week after week.', name: 'Elena R.', role: 'Marketing Director, RetailHQ', avatar: '👩‍💼', order: 3 },
+    ];
+
+    for (const item of defaults) {
+      await sql`INSERT INTO testimonials (quote, name, role, avatar, order)
+        VALUES (${item.quote}, ${item.name}, ${item.role}, ${item.avatar}, ${item.order})`;
+    }
+    console.log(`Seeded ${defaults.length} testimonials.`);
   }
 
   console.log('Database seeded successfully.');
