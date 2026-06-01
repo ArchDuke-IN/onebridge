@@ -5,7 +5,7 @@ import * as motion from 'framer-motion/client';
 import { getPageContent } from '@/lib/content';
 
 export const metadata: Metadata = {
-  title: 'About Us | One Bridge Marketing',
+  title: 'About Us | OneBridge Marketing',
   description: 'We build functional, high-earning marketing systems. You run your business.',
   alternates: { canonical: `${siteConfig.url}/about` },
 };

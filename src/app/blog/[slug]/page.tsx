@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const rows = await db.select().from(posts).where(eq(posts.slug, slug));
   const post = rows[0];
   if (!post) return { title: 'Not Found' };
-  return { title: `${post.title} | One Bridge Marketing` };
+    return { title: `${post.title} | OneBridge Marketing` };
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {

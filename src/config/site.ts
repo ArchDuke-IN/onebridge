@@ -1,6 +1,6 @@
 export const siteConfig = {
-  name: "One Bridge Marketing",
-  description: "One Bridge Marketing is a premium done-for-you digital growth agency based in India. We help businesses scale with custom web design, SEO, social media, and paid ads.",
+  name: "OneBridge Marketing",
+  description: "OneBridge Marketing is a premium done-for-you digital growth agency based in India. We help businesses scale with custom web design, SEO, social media, and paid ads.",
   url: "https://onebridgemarketing.in",
   ogImage: "https://onebridgemarketing.in/og.jpg",
   links: {

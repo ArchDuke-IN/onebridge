@@ -34,7 +34,7 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md bg-white rounded-2xl border border-gray-200 shadow-lg p-8">
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-gray-900">Admin Login</h1>
-          <p className="text-gray-500 text-sm mt-2">One Bridge Marketing</p>
+          <p className="text-gray-500 text-sm mt-2">OneBridge Marketing</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">

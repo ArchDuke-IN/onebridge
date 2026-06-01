@@ -121,7 +121,7 @@ async function seed() {
   const imgCountVal = Number(imgCount[0]?.c);
   if (imgCountVal === 0) {
     const defaultImages = [
-      { key: 'logo', url: '/logo.jpeg', alt: 'One Bridge Marketing' },
+      { key: 'logo', url: '/logo.jpeg', alt: 'OneBridge Marketing' },
       { key: 'service_social_media', url: 'https://picsum.photos/seed/social-media-mgmt/800/1000', alt: 'Social media management' },
       { key: 'service_content_creation', url: 'https://picsum.photos/seed/content-creation/800/1000', alt: 'Content creation' },
       { key: 'service_branding', url: 'https://picsum.photos/seed/brand-identity/800/1000', alt: 'Branding and identity' },

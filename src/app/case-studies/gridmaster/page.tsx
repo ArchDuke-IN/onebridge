@@ -3,8 +3,8 @@ import Link from 'next/link';
 import * as motion from 'framer-motion/client';
 
 export const metadata: Metadata = {
-  title: 'GridMaster Case Study | One Bridge Marketing',
-  description: 'How One Bridge Marketing scaled GridMaster\'s lead flow by 480% in 6 months.',
+  title: 'GridMaster Case Study | OneBridge Marketing',
+  description: 'How OneBridge Marketing scaled GridMaster\'s lead flow by 480% in 6 months.',
 };
 
 const timeline = [

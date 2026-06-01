@@ -252,7 +252,7 @@ export default async function ServicesPage() {
         <div className="max-w-[1200px] mx-auto relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">{c['why_us.title'] ?? "Why Choose One Bridge?"}</h2>
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">{c['why_us.title'] ?? "Why Choose OneBridge?"}</h2>
               <ul className="space-y-6">
                 {whyUsItems.map((item, idx) => (
                   <motion.li key={idx} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.1 }} className="flex gap-4 text-lg text-white/90">

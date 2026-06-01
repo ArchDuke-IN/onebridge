@@ -8,8 +8,8 @@ import * as motion from 'framer-motion/client';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Blog | One Bridge Marketing',
-  description: 'Insights, strategies, and stories from the team at One Bridge Marketing.',
+  title: 'Blog | OneBridge Marketing',
+  description: 'Insights, strategies, and stories from the team at OneBridge Marketing.',
 };
 
 export default async function BlogPage() {

@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     "Visual Identity",
     "Brand Design",
     "SEO Optimization",
-    "One Bridge Marketing"
+    "OneBridge Marketing"
   ],
   authors: [
     {

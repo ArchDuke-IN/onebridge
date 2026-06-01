@@ -10,7 +10,7 @@ import { getPageContent } from '@/lib/content';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Our Work & Results | One Bridge Marketing',
+  title: 'Our Work & Results | OneBridge Marketing',
   description: 'View our case studies and the results we bring to our clients.',
   alternates: { canonical: `${siteConfig.url}/projects` },
 };

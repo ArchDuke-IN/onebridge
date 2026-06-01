@@ -65,13 +65,9 @@ export function Navbar() {
     )}>
       <div className="max-w-[1200px] mx-auto px-6 flex items-center justify-between h-14 md:h-16">
 
-        <Link href="/" className="flex items-center gap-2 shrink-0" aria-label="One Bridge Marketing">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 20 L16 8 L28 20" stroke="#1a2744" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M8 24 L16 14 L24 24" stroke="#F97316" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-            <circle cx="16" cy="8" r="2" fill="#1a2744"/>
-          </svg>
-          <span className="font-[var(--font-satoshi)] text-lg text-[var(--navy)] font-bold tracking-tight">One Bridge</span>
+        <Link href="/" className="flex items-center gap-2.5 shrink-0" aria-label="OneBridge Marketing">
+          <img src="/logo.jpeg" alt="OneBridge Marketing" className="h-8 w-8 rounded-full object-cover" />
+          <span className="font-[var(--font-satoshi)] text-lg text-[var(--navy)] font-bold tracking-tight">OneBridge</span>
         </Link>
 
         <div className="hidden md:flex items-center gap-1">

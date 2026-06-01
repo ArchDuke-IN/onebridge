@@ -36,7 +36,7 @@ export async function POST(req: Request) {
     if (process.env.RESEND_API_KEY) {
       const resend = new Resend(process.env.RESEND_API_KEY);
       await resend.emails.send({
-        from: 'One Bridge Marketing <onboarding@resend.dev>',
+        from: 'OneBridge Marketing <onboarding@resend.dev>',
         to: 'contact@onebridgemarketing.com',
         subject: `New Inquiry from ${name}`,
         html: `
