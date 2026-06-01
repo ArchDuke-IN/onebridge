@@ -15,12 +15,29 @@ export const metadata: Metadata = {
   alternates: { canonical: `${siteConfig.url}/projects` },
 };
 
+const placeholderItems = [
+  { id: 0, slug: null, image: '', imageEmoji: '🎯', label: 'Branding', title: 'Project One', result: 'Coming Soon' },
+  { id: 1, slug: null, image: '', imageEmoji: '📱', label: 'Social Media', title: 'Project Two', result: 'Coming Soon' },
+  { id: 2, slug: null, image: '', imageEmoji: '🌐', label: 'Web Dev', title: 'Project Three', result: 'Coming Soon' },
+  { id: 3, slug: null, image: '', imageEmoji: '📊', label: 'Marketing', title: 'Project Four', result: 'Coming Soon' },
+  { id: 4, slug: null, image: '', imageEmoji: '🎬', label: 'Content', title: 'Project Five', result: 'Coming Soon' },
+];
+
+const placeholderTestimonials = [
+  { id: 0, quote: 'Your testimonial here — edit in admin.', name: 'Client Name', role: 'Business Owner' },
+  { id: 1, quote: 'Real feedback from real clients goes here.', name: 'Client Name', role: 'CEO' },
+  { id: 2, quote: 'Share your success story with the world.', name: 'Client Name', role: 'Founder' },
+];
+
 export default async function WorkPage() {
   const c = await getPageContent('projects');
-  const [caseStudies, testimonials] = await Promise.all([
+  const [dbItems, dbTestimonials] = await Promise.all([
     db.select().from(portfolioItems).where(eq(portfolioItems.published, true)).orderBy(asc(portfolioItems.order)),
     db.select().from(testimonialsTable).where(eq(testimonialsTable.published, true)).orderBy(asc(testimonialsTable.order)),
   ]);
+
+  const caseStudies = dbItems.length ? dbItems : placeholderItems;
+  const testimonials = dbTestimonials.length ? dbTestimonials : placeholderTestimonials;
 
   return (
     <div className="flex flex-col w-full bg-[var(--background)]">
