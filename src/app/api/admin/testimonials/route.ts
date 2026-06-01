@@ -20,7 +20,7 @@ export async function POST() {
       quote: 'Add a client quote here.',
       name: 'Client Name',
       role: 'Role, Company',
-      avatar: '💬',
+      avatar: '',
       order: 0,
       published: true,
       createdAt: now,

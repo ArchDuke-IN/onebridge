@@ -16,11 +16,11 @@ export const metadata: Metadata = {
 };
 
 const defaults = [
-  { slug: 'project-one', label: 'Branding', title: 'Project One', subtitle: 'Brand identity', description: '', result: 'Coming Soon', image: '', imageEmoji: '🎯', tags: '[]' },
-  { slug: 'project-two', label: 'Social Media', title: 'Project Two', subtitle: 'Social strategy', description: '', result: 'Coming Soon', image: '', imageEmoji: '📱', tags: '[]' },
-  { slug: 'project-three', label: 'Web Dev', title: 'Project Three', subtitle: 'Web development', description: '', result: 'Coming Soon', image: '', imageEmoji: '🌐', tags: '[]' },
-  { slug: 'project-four', label: 'Marketing', title: 'Project Four', subtitle: 'Marketing campaign', description: '', result: 'Coming Soon', image: '', imageEmoji: '📊', tags: '[]' },
-  { slug: 'project-five', label: 'Content', title: 'Project Five', subtitle: 'Content strategy', description: '', result: 'Coming Soon', image: '', imageEmoji: '🎬', tags: '[]' },
+  { slug: 'project-one', label: 'Branding', title: 'Project One', subtitle: 'Brand identity', description: '', result: 'Coming Soon', image: '', imageEmoji: '', tags: '[]' },
+  { slug: 'project-two', label: 'Social Media', title: 'Project Two', subtitle: 'Social strategy', description: '', result: 'Coming Soon', image: '', imageEmoji: '', tags: '[]' },
+  { slug: 'project-three', label: 'Web Dev', title: 'Project Three', subtitle: 'Web development', description: '', result: 'Coming Soon', image: '', imageEmoji: '', tags: '[]' },
+  { slug: 'project-four', label: 'Marketing', title: 'Project Four', subtitle: 'Marketing campaign', description: '', result: 'Coming Soon', image: '', imageEmoji: '', tags: '[]' },
+  { slug: 'project-five', label: 'Content', title: 'Project Five', subtitle: 'Content strategy', description: '', result: 'Coming Soon', image: '', imageEmoji: '', tags: '[]' },
 ];
 
 const defaultTestimonials = [
@@ -145,7 +145,7 @@ function ProjectSection({ item }: { item: { image: string; imageEmoji: string; l
           />
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center gap-3 text-[var(--navy)]">
-            <span className="text-5xl md:text-6xl">{item.imageEmoji || '🖼️'}</span>
+            <svg className="w-12 h-12 md:w-16 md:h-16 text-[var(--navy)]/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="12" cy="12" r="3"/><circle cx="18" cy="6" r="1.5" fill="currentColor"/></svg>
             <span className="text-xs uppercase tracking-widest text-[var(--text)]">{item.label}</span>
             <span className="text-sm font-medium">{item.title}</span>
           </div>

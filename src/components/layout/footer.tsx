@@ -3,7 +3,7 @@ import { siteConfig } from '@/config/site';
 
 export function Footer() {
   return (
-    <footer className="border-t-2 border-[var(--border)] bg-[var(--background)] mt-24">
+    <footer className="bg-white mt-24">
       <div className="max-w-[1200px] mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div className="md:col-span-1">

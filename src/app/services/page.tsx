@@ -21,21 +21,18 @@ const serviceDefaults = [
     title: "Social Media Management",
     desc: "Strategy, content calendar, posting & community engagement across Instagram, LinkedIn, TikTok & Twitter.",
     color: "bg-[#08D9D6]",
-    icon: "📱"
   },
   {
     id: "02",
     title: "Content Creation",
     desc: "Reels, video production, carousels, graphics, copywriting & branded posts that actually convert.",
     color: "bg-[#FF66C4]",
-    icon: "🎬"
   },
   {
     id: "03",
     title: "Branding & Identity",
     desc: "Logo design, brand guidelines, visual identity systems, color palettes & complete brand positioning.",
     color: "bg-[#FFE135]",
-    icon: "🎨"
   },
   {
     id: "04",
@@ -43,21 +40,18 @@ const serviceDefaults = [
     desc: "Fast, mobile-optimized, conversion-focused websites built with modern tech. SEO-ready from day one.",
     color: "bg-white",
     textColor: "text-gray-900",
-    icon: "💻"
   },
   {
     id: "05",
     title: "Digital Marketing",
     desc: "Paid Ads (Meta & Google), SEO strategy, email marketing, retargeting & complete marketing automation.",
     color: "bg-[#A05CFF]",
-    icon: "📊"
   },
   {
     id: "06",
     title: "Influencer & PR",
     desc: "Creator partnerships, press releases, media outreach, brand collaborations & reputation management.",
     color: "bg-[#52FFC2]",
-    icon: "⭐"
   }
 ];
 
@@ -71,7 +65,6 @@ export default async function ServicesPage() {
         desc: s.description,
         color: s.color || 'bg-white',
         textColor: s.color ? 'text-gray-900' : 'text-gray-900',
-        icon: s.emoji || '⭐',
       }))
     : serviceDefaults;
 
@@ -155,7 +148,7 @@ export default async function ServicesPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className={`${service.color} ${service.textColor || 'text-gray-900'} rounded-3xl p-8 md:p-10 border-2 border-[var(--navy)] shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group cursor-pointer relative overflow-hidden`}
+                className={`${service.color} ${service.textColor || 'text-gray-900'} p-8 md:p-10 hover:-translate-y-1 transition-all duration-300 group cursor-pointer relative overflow-hidden`}
               >
                 {idx % 2 === 0 && (
                   <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/20 rounded-full"></div>
@@ -165,7 +158,7 @@ export default async function ServicesPage() {
                 )}
                 
                 <div className="relative z-10">
-                  <div className="text-5xl mb-4">{service.icon}</div>
+                  <div className="w-12 h-12 rounded-full bg-white/30 flex items-center justify-center text-white font-bold text-lg mb-4">{service.id}</div>
                   <h3 className={`text-2xl md:text-3xl font-bold mb-3 ${service.textColor || 'text-gray-900'}`}>{service.title}</h3>
                   <p className={`text-base md:text-lg leading-relaxed mb-6 ${service.textColor ? 'text-gray-900/80' : 'text-gray-800'}`}>{service.desc}</p>
                   <div className="inline-flex items-center gap-2 text-sm font-semibold group-hover:translate-x-2 transition-transform">
